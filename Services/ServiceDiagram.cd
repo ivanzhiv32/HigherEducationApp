@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ParsingOfEducationalinstitutions.Services.ParserService" Collapsed="true">
+    <Position X="8.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ParserService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.AuthRegService" Collapsed="true">
+    <Position X="8.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\AuthRegService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.InstitutionReportService" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\InstitutionReportService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.InstitutionService" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\InstitutionService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.RatingService" Collapsed="true">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\RatingService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.RegionService" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\RegionService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.ReviewService" Collapsed="true">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ReviewService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.UserService" Collapsed="true">
+    <Position X="7" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.VerificationResultService" Collapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\VerificationResultService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.YearReportService" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\YearReportService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.UgnService" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\UgnService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingOfEducationalinstitutions.Services.BranchScienceServise" Collapsed="true">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\BranchScienceServise.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
