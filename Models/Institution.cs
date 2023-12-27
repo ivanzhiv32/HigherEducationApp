@@ -1,50 +1,56 @@
-﻿using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-namespace ParsingOfEducationalinstitutions
+namespace HigherEducationApp.Models
 {
-    
-    class Institution
+    [Table("institution")]  
+    public class Institution
     {
-        [JsonProperty("id_institution")]
+        [Column("id")]
         public int Id { get; set; }
-
-        [JsonProperty("name_institution")]
+        [Column("name")]
         public string Name { get; set; }
-
-        [JsonProperty("adress_institution")]
+        [Column("adress")]
         public string Adress { get; set; }
-
-        [JsonProperty("department_institution")]
+        [Column("department")]
         public string Department { get; set; }
-
-        [JsonProperty("site_institution")]
-        public string Site { get; set; }
-
-        [JsonProperty("founder_institution")]
+        [Column("founder")]
         public string Founder { get; set; }
-
-        [JsonProperty("indicators_institution")]
+        [Column("link")]
+        public string Site { get; set; }
+        [ForeignKey("id_region")]
+        public Region Region { get; set; }
+        //[Column("year")]
+        //public int Year { get; set; } //Под вопросом
+        public double Rating { get; set; } //Из таблицы rating_of_institutions
+        
+        public virtual List<InstitutionReport> InstitutionReports { get; set; }
         public List<Indicator> Indicators { get; set; }
         public List<BranchScience> BranchesScience { get; set; }
-        public List<Ugn> Ugns { get; set; }
-        public List<VerificationResult> VerificationResults { get; set; }
-        public List<Review> Reviews { get; set; }
-        [JsonIgnore]
-        public int Year { get; set; }
-        public double Rating { get; set; }
+        public virtual List<DistributionUgn> Ugns { get; set; }
+        public virtual List<VerificationResult> VerificationResults { get; set; }
+        public virtual List<ReviewOfInstitution> Reviews { get; set; }
+
 
         public Institution(int id, int year)
         {
             Id = id;
-            Year = year;
+        }
+
+        public Institution(int id, string name, string adress, string department, string founder, string site, Region region)
+        {
+            Id = id;
+            Name = name;
+            Adress = adress;
+            Department = department;
+            Founder = founder;
+            Site = site;
+            Region = region;
         }
     }
 }

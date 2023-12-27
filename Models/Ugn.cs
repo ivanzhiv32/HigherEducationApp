@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ParsingOfEducationalinstitutions
+namespace HigherEducationApp.Models
 {
-    class Ugn
+    [Table("ugn")]
+    public class Ugn
     {
+        [Column("id")]
         public int Id { get; set; }
+        [Column("name")]
         public string Name { get; set; }
 
         public Ugn(int id, string name)

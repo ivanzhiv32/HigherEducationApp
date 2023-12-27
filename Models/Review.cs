@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParsingOfEducationalinstitutions
+namespace HigherEducationApp.Models
 {
-    enum TypeTonality
+    public enum TypeTonality
     {
         Positive,
         Negative,
         Neutral
     }
-    class Review
+    public class Review
     {
         public int Id { get; set; }
         public string TextReview { get; set; }

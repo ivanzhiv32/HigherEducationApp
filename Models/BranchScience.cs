@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ParsingOfEducationalinstitutions
+namespace HigherEducationApp.Models
 {
-    class BranchScience
+    [Table("branches_of_science")]
+    public class BranchScience
     {
+        [Column("id")]
         public int Id { get; set; }
+        [Column("name")]
         public int Name { get; set; }
 
         public BranchScience(int id, int name)
