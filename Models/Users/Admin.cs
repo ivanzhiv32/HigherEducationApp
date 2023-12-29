@@ -10,8 +10,12 @@ namespace HigherEducationApp.Models.Users
     [Table("admins")]
     public class Admin : User
     {
-        //[Column("id_user")]
-        //public User User { get; set; }
+        [ForeignKey("id_user")]
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+        public Admin() { }
+
         public Admin(int id, string name, string surName, string patronymic, string login, string password, string salt, string email):
             base(id, name, surName, patronymic, login, password, salt, email)
         {

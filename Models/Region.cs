@@ -16,6 +16,8 @@ namespace HigherEducationApp.Models
         public virtual List<RegionReport> RegionReports { get; set; }
         public virtual List<Institution> Institutions { get; set; }
 
+        public Region() { }
+        
         public Region(int id, string name)
         {
             Id = id;

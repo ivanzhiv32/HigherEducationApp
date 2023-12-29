@@ -1,0 +1,18 @@
+﻿@model HigherEducationApp.Dto.YearReportDto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>@Model.Year</h4>
+    <h4>@Model.CountAllStudents</h4>
+    <h4>@Model.CountFreeFormStudents</h4>
+    <h4>@Model.CountFullTimeStudents</h4>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

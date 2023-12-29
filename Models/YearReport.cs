@@ -47,5 +47,9 @@ namespace HigherEducationApp.Models
         {
             Year = year;
         }
+
+        public YearReport()
+        {
+        }
     }
 }

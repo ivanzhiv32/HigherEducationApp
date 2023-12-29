@@ -20,5 +20,9 @@ namespace HigherEducationApp.Models
             Id = id;
             Name = name;
         }
+
+        public BranchScience()
+        {
+        }
     }
 }

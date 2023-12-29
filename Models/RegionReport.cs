@@ -28,6 +28,8 @@ namespace HigherEducationApp.Models
         [Column("count_freeform_students")]
         public int CountFreeFormStudents { get; set; }
 
+        public RegionReport() { }
+
         public RegionReport(int id, Region region, YearReport year)
         {
             Id = id;

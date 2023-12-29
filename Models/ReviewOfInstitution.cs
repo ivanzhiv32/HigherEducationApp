@@ -25,5 +25,9 @@ namespace HigherEducationApp.Models
             Tonality = tonality;
             Text = text;
         }
+
+        public ReviewOfInstitution()
+        {
+        }
     }
 }

@@ -31,5 +31,9 @@ namespace HigherEducationApp.Models
             SubjectVerification = subjectVerification;
             Violation = violation;
         }
+
+        public VerificationResult()
+        {
+        }
     }
 }

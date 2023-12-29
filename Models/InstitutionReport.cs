@@ -9,6 +9,8 @@ namespace HigherEducationApp.Models
     [Table("institution_reports")]
     public class InstitutionReport
     {
+        [Column("id")]
+        public int Id { get; set; }
         [ForeignKey("id_institution")]
         public Institution Institution { get; set; }
         [ForeignKey("id_year")]

@@ -13,5 +13,9 @@ namespace HigherEducationApp.Models
         public int Id { get; set; }
         [Column("tonality")]
         public int Value { get; set; }
+
+        public Tonality()
+        {
+        }
     }
 }

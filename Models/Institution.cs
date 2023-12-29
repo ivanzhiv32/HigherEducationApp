@@ -36,6 +36,9 @@ namespace HigherEducationApp.Models
         public virtual List<VerificationResult> VerificationResults { get; set; }
         public virtual List<ReviewOfInstitution> Reviews { get; set; }
 
+        public Institution()
+        {
+        }
 
         public Institution(int id, int year)
         {

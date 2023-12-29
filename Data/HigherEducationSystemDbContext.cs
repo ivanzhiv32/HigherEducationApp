@@ -16,30 +16,36 @@ namespace HigherEducationApp.Data
     public class HigherEducationSystemDbContext : DbContext
     {
         private string connectionString = "server=127.0.0.1;port=3306;username=root;password=dgiva4444;database=new_schema";
-        DbSet<YearReport> YearReports { get; set; }
-        DbSet<Region> Regions { get; set; }
-        DbSet<RegionReport> RegionReports { get; set; }
-        DbSet<Institution> Institutions { get; set; }
-        DbSet<InstitutionReport> InstitutionReports { get; set; }
-        DbSet<UnitMeasure> UnitsMeasure { get; set; }
-        DbSet<TypeIndicator> TypeIndicators { get; set; }
-        DbSet<Indicator> Indicators { get; set; }
-        DbSet<Ugn> Ugns { get; set; }
-        DbSet<DistributionUgn> DistributionUgns { get; set; }
-        DbSet<BranchScience> BranchesScience { get; set; }
-        DbSet<DistributionBranches> DistributionBranches { get; set; }
-        DbSet<VerificationResult> VerificationResults { get; set; }
-        DbSet<Tonality> Tonalities { get; set; }
-        DbSet<ReviewOfInstitution> ReviewsOfInstitution { get; set; }
-        DbSet<User> Users { get; set; }
-        DbSet<Admin> Admins { get; set; }
-        DbSet<Applicant> Applicants { get; set; }
-        DbSet<RepresentativeInstitution> RepresentativesInstitution { get; set; }
+        public DbSet<LinkReady> LinksReady { get; set; }
+        public DbSet<YearReport> YearReports { get; set; }
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<RegionReport> RegionReports { get; set; }
+        public DbSet<Institution> Institutions { get; set; }
+        public DbSet<InstitutionReport> InstitutionReports { get; set; }
+        public DbSet<UnitMeasure> UnitsMeasure { get; set; }
+        public DbSet<TypeIndicator> TypeIndicators { get; set; }
+        public DbSet<Indicator> Indicators { get; set; }
+        public DbSet<Ugn> Ugns { get; set; }
+        public DbSet<DistributionUgn> DistributionUgns { get; set; }
+        public DbSet<BranchScience> BranchesScience { get; set; }
+        public DbSet<DistributionBranches> DistributionBranches { get; set; }
+        public DbSet<VerificationResult> VerificationResults { get; set; }
+        public DbSet<Tonality> Tonalities { get; set; }
+        public DbSet<ReviewOfInstitution> ReviewsOfInstitution { get; set; }
+        //public DbSet<User> Users { get; set; }
+        //public DbSet<Admin> Admins { get; set; }
+        //public DbSet<Applicant> Applicants { get; set; }
+        //public DbSet<RepresentativeInstitution> RepresentativesInstitution { get; set; }
 
         public HigherEducationSystemDbContext(DbContextOptions options) : base(options) { }
 
+        public HigherEducationSystemDbContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //optionsBuilder.UseSqlServer(connectionString);
             optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 25)));
             //optionsBuilder.ConfigureWarnings(w => w.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning));
         }
@@ -49,9 +55,24 @@ namespace HigherEducationApp.Data
 
             /*Настройка связей между таблицами*/
 
-            //user <-> applicant
-            //user <-> representativeInstitution
-            //user <-> admin
+            modelBuilder.Entity<LinkReady>();
+
+            ////user <-> applicant
+            //modelBuilder.Entity<Applicant>()
+            //    .HasOne(u => u.User)
+            //    .WithOne(m => m.Applicant)
+            //    .HasForeignKey<User>();
+            ////user <-> representativeInstitution
+            //modelBuilder.Entity<RepresentativeInstitution>()
+            //    .HasOne(u => u.User)
+            //    .WithOne(m => m.RepresentativeInstitution)
+            //    .HasForeignKey<User>();
+
+            ////user <-> admin
+            //modelBuilder.Entity<Admin>()
+            //    .HasOne(u => u.User)
+            //    .WithOne(m => m.Admin)
+            //    .HasForeignKey<User>();
             //modelBuilder.Entity<User>().UseTptMappingStrategy<User>();
 
             //yearReports <-> institutionReports

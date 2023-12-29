@@ -26,7 +26,10 @@ namespace HigherEducationApp.Models.Users
         public string Salt { get; set; }
         [Column("email")]
         public string Email { get; set; }
-
+        public Admin? Admin { get; set; }
+        public Applicant? Applicant { get; set; }
+        public RepresentativeInstitution? RepresentativeInstitution { get; set; }
+        public User() { }
         public User(int id, string name, string surName, string patronymic, string login, string password, string salt, string email)
         {
             Id = id;
@@ -38,5 +41,6 @@ namespace HigherEducationApp.Models.Users
             Salt = salt;
             Email = email;
         }
+
     }
 }

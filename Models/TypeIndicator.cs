@@ -20,6 +20,8 @@ namespace HigherEducationApp.Models
 
         //public virtual List<Indicator> Indicators { get; set; }
 
+        public TypeIndicator() { }
+
         public TypeIndicator(int id, string name, double number, UnitMeasure unitMeasure)
         {
             Id = id;

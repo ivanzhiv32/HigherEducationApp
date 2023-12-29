@@ -13,5 +13,15 @@ namespace HigherEducationApp.Models
         public int Id { get; set; }
         [Column("name")]
         public string Name { get; set; }
+
+        public UnitMeasure()
+        {
+        }
+
+        public UnitMeasure(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

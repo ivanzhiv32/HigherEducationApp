@@ -18,6 +18,10 @@ namespace HigherEducationApp.Models
         [Column("count_students")]
         public int CountStudents { get; set; }
 
+        public DistributionUgn()
+        {
+        }
+
         public DistributionUgn(int id, Institution institution, Ugn ugn, int countStudents)
         {
             Id = id;

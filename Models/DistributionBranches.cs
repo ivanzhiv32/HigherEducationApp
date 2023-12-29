@@ -18,6 +18,10 @@ namespace HigherEducationApp.Models
         [Column("value")]
         public int Value { get; set; }
 
+        public DistributionBranches()
+        {
+        }
+
         public DistributionBranches(int id, InstitutionReport institutionReport, BranchScience branchScience, int value)
         {
             Id = id;
