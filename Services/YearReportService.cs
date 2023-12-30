@@ -15,11 +15,7 @@ namespace HigherEducationApp.Services
     /// Служба по работе с годовыми отчетами
     /// </summary>
     public class YearReportService
-    {
-        //public object? GetService(Type serviceType)
-        //{
-        //    return typeof(YearReportService);
-        //}  
+    { 
         /// <summary>
         /// Возвращает отчет за год
         /// </summary>

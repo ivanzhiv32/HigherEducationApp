@@ -168,3 +168,8 @@ D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\Microsoft.OpenApi
 D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RegionReport\Create.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RegionReport\Delete.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RegionReport\Details.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RegionReport\Edit.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RegionReport\Index.cshtml.g.cs
