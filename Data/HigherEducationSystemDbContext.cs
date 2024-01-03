@@ -97,9 +97,14 @@ namespace HigherEducationApp.Data
                 .IsRequired();
 
             //region <-> institution
-            modelBuilder.Entity<Region>()
-                .HasMany(u => u.Institutions)
-                .WithOne(m => m.Region)
+            //modelBuilder.Entity<Region>()
+            //    .HasMany(u => u.Institutions)
+            //    .WithOne(m => m.Region)
+            //    .HasForeignKey("id_region")
+            //    .IsRequired();
+            modelBuilder.Entity<Institution>()
+                .HasOne(u => u.Region)
+                .WithMany(m => m.Institutions)
                 .HasForeignKey("id_region")
                 .IsRequired();
 
@@ -180,5 +185,6 @@ namespace HigherEducationApp.Data
                 .HasForeignKey("id_ugn")
                 .IsRequired();
         }
+        public DbSet<HigherEducationApp.Models.RatingInstitution> RatingInstitution { get; set; }
     }
 }

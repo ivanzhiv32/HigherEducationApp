@@ -24,13 +24,19 @@ namespace HigherEducationApp.Services
         {
             using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
             {
-                Region? region = educationSystemContext.Regions.FirstOrDefault(c => c.Id == id);
+                var c = educationSystemContext.Regions
+                    .Include(m => m.Institutions);
+
+                Region? region = c.FirstOrDefault(k => k.Id == id);
 
                 RegionInfoDto? regionDto = new RegionInfoDto()
                 {
                     Id = region.Id,
                     Name = region.Name,
+                    CountInstitutions = region.Institutions.Count,
+                    Region = region
                 };
+                //https://localhost:44356/RegionReport/Details?id=3&year=2022
                 return regionDto;
             }
         }
@@ -45,16 +51,11 @@ namespace HigherEducationApp.Services
             using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
             {
                 var c = educationSystemContext.RegionReports
-                    .Include(c => c.Region)
-                    .Include(k => k.YearReport)
+                    .Include(c => c.Region.Institutions)
+                    .Include(k => k.YearReport.InstitutionReports)
                     .Where(c => c.Region.Id == id);
                 RegionReport? regionReport = c.FirstOrDefault(c => c.YearReport.Year == year);
-                //RegionReport? regionReport = educationSystemContext.RegionReports
-                //    .Include(c => c.Region)
-                //    .Include(k => k.YearReport)
-                //    .Where(c => c.Region.Id == id)
-                //    .FirstOrDefaultAsync(c => c.YearReport.Year == year);
-                //RegionReport? regionReport = educationSystemContext.RegionReports.FirstOrDefault(n => n.Region.Id == id & n.YearReport.Year == year);
+
 
                 RegionReportDto? regionReportDto = new RegionReportDto()
                 {
@@ -64,9 +65,16 @@ namespace HigherEducationApp.Services
                     CountAllStudents = regionReport.CountAllStudents,
                     CountFullTimeStudents = regionReport.CountFullTimeStudents,
                     CountFreeFormStudents = regionReport.CountFreeFormStudents,
+                    InstitutionReports = regionReport.YearReport.InstitutionReports,
+                    RegionInfo = GetRegionInfo(id)
                 };
                 return regionReportDto;
             }
+        }
+
+        public List<DistributionBranches> GetBranchesOfScince(int id, int year)
+        {
+            return null;
         }
     }
 }

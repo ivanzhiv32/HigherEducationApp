@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Details";
 }
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="~/js/YearReportPlot.js"></script>
 
 <h1>Details</h1>
 
@@ -11,6 +13,7 @@
     <h4>@Model.CountAllStudents</h4>
     <h4>@Model.CountFreeFormStudents</h4>
     <h4>@Model.CountFullTimeStudents</h4>
+    <div id="piechart" style="width: 900px; height: 500px"></div>
 </div>
 
 <div>

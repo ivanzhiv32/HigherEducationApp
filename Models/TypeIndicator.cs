@@ -14,7 +14,7 @@ namespace HigherEducationApp.Models
         [Column("name")]
         public string Name { get; set; }
         [Column("number")]
-        public double Number { get; set; }
+        public string Number { get; set; }
         [ForeignKey("id_unit_measure")]
         public UnitMeasure UnitMeasure { get; set; }
 
@@ -22,7 +22,7 @@ namespace HigherEducationApp.Models
 
         public TypeIndicator() { }
 
-        public TypeIndicator(int id, string name, double number, UnitMeasure unitMeasure)
+        public TypeIndicator(int id, string name, string number, UnitMeasure unitMeasure)
         {
             Id = id;
             Name = name;

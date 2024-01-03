@@ -173,3 +173,13 @@ D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\Regio
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RegionReport\Details.cshtml.g.cs
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RegionReport\Edit.cshtml.g.cs
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RegionReport\Index.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\InstitutionReport\Create.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\InstitutionReport\Delete.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\InstitutionReport\Details.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\InstitutionReport\Edit.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\InstitutionReport\Index.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Create.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Delete.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Details.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Edit.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Index.cshtml.g.cs

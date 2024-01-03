@@ -25,7 +25,9 @@ namespace HigherEducationApp.Controllers
         // GET: YearReport
         public async Task<IActionResult> Index()
         {
-            return View(await _context.YearReports.ToListAsync());
+            YearReportDto yearReport = yearReportService.GetYearReport(2023);
+
+            return View(yearReport);
         }
 
         // GET: YearReport/Details/5

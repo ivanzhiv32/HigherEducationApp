@@ -1,55 +1,63 @@
-﻿@model IEnumerable<HigherEducationApp.Models.RegionReport>
+﻿@model HigherEducationApp.Dto.Region.RegionReportDto
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
 }
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="~/js/YearReportPlot.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-<!DOCTYPE html>
+    function drawChart() {
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CountAllStudents)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CountFullTimeStudents)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CountFreeFormStudents)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountAllStudents)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountFullTimeStudents)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountFreeFormStudents)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+        var data = google.visualization.arrayToDataTable([
+            ['Направление', 'Кол-во студентов'],
+            ['Гуманитарные науки', @Model.Year],
+            ['Искусство и культура', 89226],
+            ['Оборона и безопасность государства, военные науки', 64],
+            ['Математические и естественные науки', 172926],
+            ['Инженерное дело, технологии и технические науки', 901026],
+            ['Здравоохранение и медицинские науки', 335333],
+            ['Сельское хозяйство и сельскохозяйственные науки', 111652],
+            ['Науки об обществе', 793967],
+            ['Образование и педагогические науки', 262305]
+        ]);
+
+        var options = {
+            title: 'My Daily Activities',
+            sliceVisibilityThreshold: .00001
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+<div class="info" id="res" style="font: normal 400 11px Tahoma;">
+    <h1>Характеристика высшего образование в РФ</h1>
+    <h2>@Model.Year | @Model.Name</h2>
+
+    <div id="statistic" style="width: 100%; position: relative; margin: 10px 0px 0px;">
+        <div class="statistic_info" style="position: relative;padding: 4px 9px;font: 20px / 20px Tahoma;color: rgb(68, 85, 85);left: 0px;" id="statistic_info_all">
+            <span><span class="val">@Model.InstitutionReports.Count</span> организаций высшего образования<sup style="font:9px Calibri;">*</sup>, в том числе:</span>
+
+            <hr style="border:none;border-bottom:1px solid #aaa;margin:0px 9px;">
+        </div>
+
+        <div class="statistic_info" style="position: relative;padding: 4px 9px;font: 20px / 20px Tahoma;color: rgb(68, 85, 85);left: 0px;" id="statistic_info_chart_kont">
+            <div style="border-left:10px solid #88b;padding:0px 6px;margin:4px 0px;margin-left:6px;">
+                <span class="val" style="font-size:15px;">@Model.CountAllStudents</span> студентов, обучающихся по программам высшего образования
+            </div>
+            <div style="border-left:10px solid #c8a;padding:0px 6px;margin:4px 0px;margin-left:6px;">
+                <span class="val" style="font-size:15px;">@Model.CountFullTimeStudents</span> студентов очной формы обучения
+            </div>
+            <div style="border-left:10px solid #9a8;padding:0px 6px;margin:4px 0px;margin-left:6px;">
+                <span class="val" style="font-size:15px;">@Model.CountFreeFormStudents</span> студентов за счет бюджетных средств бюджетной системы РФ
+            </div>
+            <hr style="border:none;border-bottom:1px solid #aaa;margin:0px 9px;">
+            <div id="piechart" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+    </div>
+</div>

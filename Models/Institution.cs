@@ -27,7 +27,7 @@ namespace HigherEducationApp.Models
         public Region Region { get; set; }
         //[Column("year")]
         //public int Year { get; set; } //Под вопросом
-        public double Rating { get; set; } //Из таблицы rating_of_institutions
+        //public double Rating { get; set; } //Из таблицы rating_of_institutions
         
         public virtual List<InstitutionReport> InstitutionReports { get; set; }
         public List<Indicator> Indicators { get; set; }
