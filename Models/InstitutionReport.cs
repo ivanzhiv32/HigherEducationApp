@@ -14,12 +14,21 @@ namespace HigherEducationApp.Models
         [ForeignKey("id_institution")]
         public Institution Institution { get; set; }
         [ForeignKey("id_year")]
-        public virtual YearReport Year { get; set; }
+        public YearReport Year { get; set; }
         public virtual List<Indicator> Indicators { get; set; }
         public virtual List<DistributionBranches> DistributionBranches { get; set; }
 
         public InstitutionReport()
         {
+        }
+
+        public InstitutionReport(int id, Institution institution, YearReport year, List<Indicator> indicators, List<DistributionBranches> distributionBranches)
+        {
+            Id = id;
+            Institution = institution;
+            Year = year;
+            Indicators = indicators;
+            DistributionBranches = distributionBranches;
         }
 
         public InstitutionReport(Institution institution, YearReport year, List<Indicator> indicators)

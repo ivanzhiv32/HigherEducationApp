@@ -11,13 +11,12 @@ namespace HigherEducationApp.Models
     {
         [Column("id")]
         public int Id { get; set; }
+        [Column("value")]
+        public double Value { get; set; }
         [ForeignKey("id_institution_report_year")]
         public InstitutionReport InstitutionReport { get; set; }
         [ForeignKey("id_name_indicator")]
         public TypeIndicator TypeIndicator { get; set; }
-        [Column("value")]
-        public double Value { get; set; }
-
         public Indicator() { }
 
         public Indicator(int id, InstitutionReport institutionReport, TypeIndicator typeIndicator, double value)

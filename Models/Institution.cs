@@ -30,7 +30,7 @@ namespace HigherEducationApp.Models
         //public double Rating { get; set; } //Из таблицы rating_of_institutions
         
         public virtual List<InstitutionReport> InstitutionReports { get; set; }
-        public List<Indicator> Indicators { get; set; }
+        //public List<Indicator> Indicators { get; set; }
         public List<BranchScience> BranchesScience { get; set; }
         public virtual List<DistributionUgn> Ugns { get; set; }
         public virtual List<VerificationResult> VerificationResults { get; set; }

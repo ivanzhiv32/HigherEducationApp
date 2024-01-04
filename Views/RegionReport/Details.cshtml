@@ -1,4 +1,4 @@
-﻿@model HigherEducationApp.Dto.Region.RegionReportDto
+﻿@model HigherEducationApp.Models.RegionReport
 
 @{
     ViewData["Title"] = "Index";
@@ -37,11 +37,21 @@
 
 <div class="info" id="res" style="font: normal 400 11px Tahoma;">
     <h1>Характеристика высшего образование в РФ</h1>
-    <h2>@Model.Year | @Model.Name</h2>
+    <h2>@Model.YearReport.Year | @Model.Region.Name</h2>
 
     <div id="statistic" style="width: 100%; position: relative; margin: 10px 0px 0px;">
         <div class="statistic_info" style="position: relative;padding: 4px 9px;font: 20px / 20px Tahoma;color: rgb(68, 85, 85);left: 0px;" id="statistic_info_all">
-            <span><span class="val">@Model.RegionInfo.CountInstitutions</span> организаций высшего образования<sup style="font:9px Calibri;">*</sup>, в том числе:</span>
+            <span>
+                  @for (int i = 1; i < Model.Region.Institutions.Count; i++)
+                  {
+                      if(Model.Region.Institutions[i].InstitutionReports == null)
+                      {
+                          i++;
+                          <span class="val">@i</span>
+                          break;
+                      }
+                  }
+                 организаций высшего образования<sup style="font:9px Calibri;">*</sup>, в том числе:</span>
 
             <hr style="border:none;border-bottom:1px solid #aaa;margin:0px 9px;">
         </div>
@@ -61,9 +71,12 @@
         </div>
     </div>
     <div>
-        @foreach(Institution institution in Model.RegionInfo.Region.Institutions)
+        @foreach (Institution institution in Model.Region.Institutions)
+        {
+            @if (institution.InstitutionReports != null)
             {
-                <a>@institution.Name</a>
+                <a>@institution.Name;</a><br />
             }
+        }
     </div>
 </div>

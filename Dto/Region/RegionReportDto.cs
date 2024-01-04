@@ -14,8 +14,10 @@ namespace HigherEducationApp.Dto.Region
         public int CountAllStudents { get; set; }
         public int CountFullTimeStudents { get; set; }
         public int CountFreeFormStudents { get; set; }
-        public List<InstitutionReport> InstitutionReports { get; set; } 
-        public List<DistributionBranches> DistributionBranches { get; set; }
+        public RegionReport RegionReport { get; set; }
+        public List<Models.Institution> Institutions { get; set; }
+        public List<Models.InstitutionReport> InstitutionReports { get; set; } 
+        public List<Models.DistributionBranches> DistributionBranches { get; set; }
         public RegionInfoDto RegionInfo{ get; set; }
     }
 }

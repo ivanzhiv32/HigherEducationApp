@@ -137,9 +137,14 @@ namespace HigherEducationApp.Data
                 .IsRequired();
 
             //institutionReport <-> indicators
-            modelBuilder.Entity<InstitutionReport>()
-                .HasMany(u => u.Indicators)
-                .WithOne(m => m.InstitutionReport)
+            //modelBuilder.Entity<InstitutionReport>()
+            //    .HasMany(u => u.Indicators)
+            //    .WithOne(m => m.InstitutionReport)
+            //    .HasForeignKey("id_institution_report_year")
+            //    .IsRequired();
+            modelBuilder.Entity<Indicator>()
+                .HasOne(c => c.InstitutionReport)
+                .WithMany(c => c.Indicators)
                 .HasForeignKey("id_institution_report_year")
                 .IsRequired();
 
@@ -160,7 +165,7 @@ namespace HigherEducationApp.Data
             //indicators <-> typeIndicators
             modelBuilder.Entity<Indicator>()
                 .HasOne(u => u.TypeIndicator)
-                .WithMany()
+                .WithMany(c => c.Indicators)
                 .HasForeignKey("id_name_indicator")
                 .IsRequired();
 

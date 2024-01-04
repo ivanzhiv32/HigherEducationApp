@@ -36,7 +36,7 @@ namespace HigherEducationApp.Services
                     CountInstitutions = region.Institutions.Count,
                     Region = region
                 };
-                //https://localhost:44356/RegionReport/Details?id=3&year=2022
+                
                 return regionDto;
             }
         }
@@ -46,7 +46,7 @@ namespace HigherEducationApp.Services
         /// <param name="id"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        public RegionReportDto GetRegionReport(int id, int year)
+        public RegionReport GetRegionReport(int id, int year)
         {
             using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
             {
@@ -57,18 +57,19 @@ namespace HigherEducationApp.Services
                 RegionReport? regionReport = c.FirstOrDefault(c => c.YearReport.Year == year);
 
 
-                RegionReportDto? regionReportDto = new RegionReportDto()
-                {
-                    Id = regionReport.Id,
-                    Name = regionReport.Region.Name,
-                    Year = regionReport.YearReport.Year,
-                    CountAllStudents = regionReport.CountAllStudents,
-                    CountFullTimeStudents = regionReport.CountFullTimeStudents,
-                    CountFreeFormStudents = regionReport.CountFreeFormStudents,
-                    InstitutionReports = regionReport.YearReport.InstitutionReports,
-                    RegionInfo = GetRegionInfo(id)
-                };
-                return regionReportDto;
+                //RegionReportDto? regionReportDto = new RegionReportDto()
+                //{
+                //    Id = regionReport.Id,
+                //    Name = regionReport.Region.Name,
+                //    Year = regionReport.YearReport.Year,
+                //    CountAllStudents = regionReport.CountAllStudents,
+                //    CountFullTimeStudents = regionReport.CountFullTimeStudents,
+                //    CountFreeFormStudents = regionReport.CountFreeFormStudents,
+                //    RegionReport = regionReport,
+                //    InstitutionReports = regionReport.YearReport.InstitutionReports,
+                //    RegionInfo = GetRegionInfo(id)
+                //};
+                return regionReport;
             }
         }
 

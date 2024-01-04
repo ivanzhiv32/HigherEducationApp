@@ -36,13 +36,13 @@ namespace HigherEducationApp.Controllers
                 return NotFound();
             }
 
-            RegionReportDto regionReportDto = regionService.GetRegionReport(id, year);
-            if (regionReportDto == null)
+            RegionReport regionReport = regionService.GetRegionReport(id, year);
+            if (regionReport == null)
             {
                 return NotFound();
             }
 
-            return View(regionReportDto);
+            return View(regionReport);
         }
 
         // GET: RegionReport/Create

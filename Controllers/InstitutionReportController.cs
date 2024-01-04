@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HigherEducationApp.Data;
 using HigherEducationApp.Models;
+using HigherEducationApp.Services;
 
 namespace HigherEducationApp.Controllers
 {
     public class InstitutionReportController : Controller
     {
         private readonly HigherEducationSystemDbContext _context;
+        private InstitutionReportService institutionReportService = new InstitutionReportService();
 
         public InstitutionReportController(HigherEducationSystemDbContext context)
         {
@@ -26,15 +28,14 @@ namespace HigherEducationApp.Controllers
         }
 
         // GET: InstitutionReport/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id, int year)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var institutionReport = await _context.InstitutionReports
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var institutionReport = institutionReportService.GetInstitutionReport(id, year);
             if (institutionReport == null)
             {
                 return NotFound();
