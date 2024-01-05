@@ -1,40 +1,15 @@
-﻿@model HigherEducationApp.Models.InstitutionReport
+﻿@using HigherEducationApp.Services;
+@using HigherEducationApp.Models;
+@addTagHelper *, HigherEducationApp.Service
+@model HigherEducationApp.Models.InstitutionReport
 
 @{
     ViewData["Title"] = "Index";
 }
 
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="~/js/YearReportPlot.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-            ['Направление', 'Кол-во студентов'],
-            ['Гуманитарные науки', 90000],
-            ['Искусство и культура', 89226],
-            ['Оборона и безопасность государства, военные науки', 64],
-            ['Математические и естественные науки', 172926],
-            ['Инженерное дело, технологии и технические науки', 901026],
-            ['Здравоохранение и медицинские науки', 335333],
-            ['Сельское хозяйство и сельскохозяйственные науки', 111652],
-            ['Науки об обществе', 793967],
-            ['Образование и педагогические науки', 262305]
-        ]);
-
-        var options = {
-            title: 'My Daily Activities',
-            sliceVisibilityThreshold: .00001
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-    }
-</script>
+<script src="~/js/InstitutionBranchesScince.js"></script>
 
 <div>
     <div class="block section" style=""><a name="I" style="top: -56px;"></a>I. Общие сведения</div>
@@ -70,4 +45,22 @@
             </tbody>
         </table>
     </div>
+</div>
+<div>
+    @foreach(DistributionBranches distributionBranches in @ViewBag.Branches)
+    {
+        <p>@distributionBranches.BranchScience.Name: "@distributionBranches.Value</p><br/>
+    }
+</div>
+<div style="background: red">
+    @foreach (DistributionUgn distributionUgn in @ViewBag.Ugns)
+    {
+        <p>@distributionUgn.Ugn.Name: @distributionUgn.CountStudents</p><br />
+    }
+</div>
+<div style="background: #d76b6b">
+    @foreach (Indicator indicator in @ViewBag.Indicators[0].Indicators)
+    {
+        <p>@indicator.TypeIndicator.Name: @indicator.Value</p><br />
+    }
 </div>

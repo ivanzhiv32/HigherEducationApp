@@ -31,7 +31,7 @@ namespace HigherEducationApp.Models
         
         public virtual List<InstitutionReport> InstitutionReports { get; set; }
         //public List<Indicator> Indicators { get; set; }
-        public List<BranchScience> BranchesScience { get; set; }
+        //public List<BranchScience> BranchesScience { get; set; }
         public virtual List<DistributionUgn> Ugns { get; set; }
         public virtual List<VerificationResult> VerificationResults { get; set; }
         public virtual List<ReviewOfInstitution> Reviews { get; set; }

@@ -13,9 +13,9 @@ namespace HigherEducationApp.Models
         [Column("id")]
         public int Id { get; set; }
         [Column("name")]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
-        public BranchScience(int id, int name)
+        public BranchScience(int id, string name)
         {
             Id = id;
             Name = name;

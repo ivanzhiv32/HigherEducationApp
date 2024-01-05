@@ -11,11 +11,11 @@ namespace HigherEducationApp.Models
     {
         [Column("id")]
         public int Id { get; set; }
-        [ForeignKey("id_institution_report_year")]
+        [ForeignKey("id_institution_report")]
         public InstitutionReport InstitutionReport { get; set; }
-        [ForeignKey("id_branches")]
+        [ForeignKey("id_branch")]
         public BranchScience BranchScience { get; set; }
-        [Column("value")]
+        [Column("count_students")]
         public int Value { get; set; }
 
         public DistributionBranches()

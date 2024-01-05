@@ -183,3 +183,4 @@ D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\Ratin
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Details.cshtml.g.cs
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Edit.cshtml.g.cs
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Index.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\Indicators\IndicatorView.cshtml.g.cs

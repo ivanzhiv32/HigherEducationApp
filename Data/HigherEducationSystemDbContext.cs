@@ -41,6 +41,7 @@ namespace HigherEducationApp.Data
 
         public HigherEducationSystemDbContext()
         {
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -152,20 +153,20 @@ namespace HigherEducationApp.Data
             modelBuilder.Entity<InstitutionReport>()
                 .HasMany(u => u.DistributionBranches)
                 .WithOne(m => m.InstitutionReport)
-                .HasForeignKey("id_institution_report_year")
+                .HasForeignKey("id_institution_report")
                 .IsRequired();
 
             //distributionBranches <-> branches
             modelBuilder.Entity<DistributionBranches>()
                 .HasOne(u => u.BranchScience)
                 .WithMany()
-                .HasForeignKey("id_branches")
+                .HasForeignKey("id_branch")
                 .IsRequired();
 
             //indicators <-> typeIndicators
             modelBuilder.Entity<Indicator>()
                 .HasOne(u => u.TypeIndicator)
-                .WithMany(c => c.Indicators)
+                .WithMany()
                 .HasForeignKey("id_name_indicator")
                 .IsRequired();
 

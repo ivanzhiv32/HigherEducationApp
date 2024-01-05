@@ -17,7 +17,7 @@ namespace HigherEducationApp.Models
         public string Number { get; set; }
         [ForeignKey("id_unit_measure")]
         public UnitMeasure UnitMeasure { get; set; }
-        public virtual List<Indicator> Indicators { get; set; }
+        //public virtual List<Indicator> Indicators { get; set; }
 
         public TypeIndicator() { }
 

@@ -35,12 +35,26 @@ namespace HigherEducationApp.Controllers
                 return NotFound();
             }
 
+
             var institutionReport = institutionReportService.GetInstitutionReport(id, year);
+            //var institutionReports = institutionReportService.GetInstitutionReports(id, year);
+            ViewBag.Branches = institutionReportService.GetBranchesScience(institutionReport.Id);
+            ViewBag.Ugns = institutionReportService.GetUgns(id);
+
+            List<InstitutionReport> institutionReports = new List<InstitutionReport>();
+            for (int i = year; i > 2015; i--)
+            {
+                if (i == year - 4) break;
+                institutionReports.Add(institutionReportService.GetReportWithIndicators(id, i));
+            }
+            ViewBag.Indicators = institutionReports;
+             
+
             if (institutionReport == null)
             {
                 return NotFound();
             }
-
+            ViewData["year"] = year;
             return View(institutionReport);
         }
 
