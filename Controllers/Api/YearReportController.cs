@@ -42,7 +42,7 @@ namespace HigherEducationApp.Controllers.Api
 
         // GET: api/YearReports/2022
         [HttpGet("{year}")]
-        public async Task<ActionResult<YearReportDto>> GetYearReport(int year)
+        public async Task<ActionResult<YearReport>> GetYearReport(int year)
         {
             var yearReport = yearReportService.GetYearReport(year);
 

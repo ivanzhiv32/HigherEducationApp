@@ -23,9 +23,20 @@ namespace HigherEducationApp.Controllers
         }
 
         // GET: RegionReport
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id, int year)
         {
-            return View(await _context.RegionReports.ToListAsync());
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            RegionReport regionReport = regionService.GetRegionReport(id, year);
+            if (regionReport == null)
+            {
+                return NotFound();
+            }
+
+            return View(regionReport);
         }
 
         // GET: RegionReport/Details/5
@@ -43,113 +54,6 @@ namespace HigherEducationApp.Controllers
             }
 
             return View(regionReport);
-        }
-
-        // GET: RegionReport/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: RegionReport/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CountAllStudents,CountFullTimeStudents,CountFreeFormStudents")] RegionReport regionReport)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(regionReport);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(regionReport);
-        }
-
-        // GET: RegionReport/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var regionReport = await _context.RegionReports.FindAsync(id);
-            if (regionReport == null)
-            {
-                return NotFound();
-            }
-            return View(regionReport);
-        }
-
-        // POST: RegionReport/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CountAllStudents,CountFullTimeStudents,CountFreeFormStudents")] RegionReport regionReport)
-        {
-            if (id != regionReport.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(regionReport);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RegionReportExists(regionReport.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(regionReport);
-        }
-
-        // GET: RegionReport/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var regionReport = await _context.RegionReports
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (regionReport == null)
-            {
-                return NotFound();
-            }
-
-            return View(regionReport);
-        }
-
-        // POST: RegionReport/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var regionReport = await _context.RegionReports.FindAsync(id);
-            _context.RegionReports.Remove(regionReport);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool RegionReportExists(int id)
-        {
-            return _context.RegionReports.Any(e => e.Id == id);
         }
     }
 }

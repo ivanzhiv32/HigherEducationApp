@@ -31,36 +31,57 @@ namespace HigherEducationApp.Controllers.Api
             return await _context.InstitutionReports.ToListAsync();
         }
 
-        // GET: api/InstitutionReport/5
-        [HttpGet("{id}, {year}")]
-        public async Task<ActionResult<List<InstitutionReport>>> GetInstitutionReport(int id, int year)
+        // GET: api/InstitutionReport/5/2022/1.1
+        [HttpGet("{id}, {year}, {number}")]
+        public async Task<ActionResult<List<Indicator>>> GetInstitutionReport(int id, int year, string number)
         {
-            List<InstitutionReport> institutionReports = new List<InstitutionReport>();
+            List<Indicator> indicators = new List<Indicator>();
             for (int i = year; i > 2015; i--)
             {
                 if (i == year - 4) break;
-                institutionReports.Add(institutionReportService.GetReportWithIndicators(id, i));
+                indicators.Add(institutionReportService.GetIndicatorByNumber(id, i, number));
             }
 
-            if (institutionReports == null)
+            if (indicators == null)
             {
                 return NotFound();
             }
 
-            return institutionReports;
+            return indicators;
         }
+
+        // GET: api/InstitutionReport/5/2022
+        //[HttpGet("{id}, {year}")]
+        //public async Task<ActionResult<List<InstitutionReport>>> GetInstitutionReports(int id, int year)
+        //{
+        //    List<InstitutionReport> institutionReports = new List<InstitutionReport>();
+        //    for (int i = year; i > 2015; i--)
+        //    {
+        //        if (i == year - 4) break;
+        //        institutionReports.Add(institutionReportService.GetReportWithIndicators(id, i));
+        //    }
+
+        //    if (institutionReports == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return institutionReports;
+        //}
+
         // GET: api/InstitutionReport/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DistributionUgn>> GetInstitutionReport(int id)
+        //[Route("api/InstitutionReport/{id}")]
+        public async Task<ActionResult<InstitutionReport>> GetInstitutionReport(int id)
         {
-            var institutionReport = institutionReportService.GetUgns(id);
+            var institutionReport = await _context.InstitutionReports.FindAsync(id);
 
             if (institutionReport == null)
             {
                 return NotFound();
             }
 
-            return institutionReport[0];
+            return institutionReport;
         }
 
         // PUT: api/InstitutionReport/5

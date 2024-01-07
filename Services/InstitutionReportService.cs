@@ -19,6 +19,7 @@ namespace HigherEducationApp.Services
                 IQueryable<InstitutionReport> c = educationSystemContext.InstitutionReports
                     .Include(c => c.Year.InstitutionReports)
                     .Include(c => c.Institution.Region)
+                    .Include(c => c.Indicators).ThenInclude(c => c.TypeIndicator)
                     .Where(c => c.Institution.Id == id);
 
                 InstitutionReport institutionReport = c.FirstOrDefault(c => c.Year.Year == year);
@@ -72,21 +73,24 @@ namespace HigherEducationApp.Services
             {
                 var institutionReport = educationSystemContext.InstitutionReports
                     .Include(c => c.Indicators).ThenInclude(c => c.TypeIndicator.UnitMeasure)
+                    .Include(c => c.Year)
                     .Where(c => c.Institution.Id == idInstitution)
                     .FirstOrDefault(c => c.Year.Year == year);
                 //InstitutionReport institutionReport = c.FirstOrDefault(c => c.Year.Year == year);
                 return institutionReport;
             }
         }
-        public List<Indicator> GetIndicatorsByNumber(int idInstitution, string numberIndicator, int currentYear)
+        public Indicator GetIndicatorByNumber(int idInstitution, int year, string numberIndicator)
         {
             using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
             {
                 var c = educationSystemContext.Indicators
-                    .Where(c => c.InstitutionReport.Institution.Id == idInstitution)
-                    .Include(c => c.TypeIndicator.UnitMeasure).ToList();
+                    .Include(c => c.InstitutionReport.Year)
+                    .Include(c => c.TypeIndicator.UnitMeasure)
+                    .Where(c => c.InstitutionReport.Year.Year == year);
+                Indicator indicator = c.FirstOrDefault(c => c.TypeIndicator.Number == numberIndicator);
                 //List<Indicator> indicator = c.FirstOrDefault(c => c.TypeIndicator.Number == numberIndicator);
-                return c;
+                return indicator;
             }
         }
     }

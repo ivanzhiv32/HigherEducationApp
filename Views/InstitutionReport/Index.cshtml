@@ -1,37 +1,131 @@
-﻿@model IEnumerable<HigherEducationApp.Models.InstitutionReport>
+﻿@using HigherEducationApp.Services;
+@using HigherEducationApp.Models;
+@addTagHelper *, HigherEducationApp.Service
+@model HigherEducationApp.Models.InstitutionReport
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
 }
 
-<!DOCTYPE html>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Направление', 'Кол-во студентов'],
+            ["dgsdg", ],
+            ["sdfsd", 111],
+            ["dsfsdf", 111],
+            ["dsgfds", 111],
+            ["fsdfa", 111],
+            ["fsdf", 111],
+            ["fsdf", 111],
+            ["fsdf", 111]
+        ]);
+
+        var options = {
+            title: 'My Daily Activities',
+            sliceVisibilityThreshold: .00001
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+
+<div>
+    <h3>I. Общие сведения</h3>
+    <table class="table table-striped-columns">
+        <tbody>
+            <tr>
+                <td class="table-light">Наименование образовательной организации</td>
+                <td><b style="font-family:Cambria;">@Model.Institution.Name</b></td>
+            </tr>
+            <tr>
+                <td class="table-light">Регион,<br>адрес</td>
+                <td><a href="">@Model.Institution.Region.Name</a><br><span>@Model.Institution.Adress</span></td>
+            </tr>
+            <tr>
+                <td class="table-light">Ведомственная принадлежность</td>
+                <td>@Model.Institution.Department</td>
+            </tr>
+            <tr>
+                <td class="table-light">web-сайт</td>
+                <td>@Model.Institution.Site</td>
+            </tr>
+            <tr>
+                <td class="table-light">Учредитель(и)</td>
+                <td>@Model.Institution.Founder</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div @*id="branchesScience"*@>
+    <h3 @*class="text-center"*@>II. Распределение контингента студентов образовательной организации</h3>
+    <hr>
+    <h6 class="ml-3">В образовательной организации обучается <strong>@Model.Indicators.Find(c => c.TypeIndicator.Number == "1").Value</strong> студента бакалавриата, специалитета, магистратуры</h6>
+    <h6 class="ml-3">в т.ч. <strong>@Model.Indicators.Find(c => c.TypeIndicator.Number == "100").Value</strong> очной формы обучения</h6>
+    <hr>
+    <table class="table mx-auto w-75">
+        <thead>
+            <tr>
+                <th scope="col">Отрасль науки</th>
+                <th scope="col">Контингент студентов</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (DistributionBranches distributionBranches in @ViewBag.Branches)
+            {
+                <tr>
+                    <td>@distributionBranches.BranchScience.Name</td>
+                    <td><strong>@distributionBranches.Value</strong> чел.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr>
+    <table class="table mx-auto w-75">
+        <thead>
+            <tr>
+                <th scope="col">Реализуемые УГН(С)</th>
+                <th scope="col">Контингент студентов</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DistributionUgn distributionUgn in @ViewBag.Ugns)
+            {
+                <tr>
+                    <td style="text-align:left;min-width:350px;">@distributionUgn.Ugn.Name</td>
+                    <td><strong>@distributionUgn.CountStudents</strong> чел.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr>
+</div>
+
 <table class="table">
     <thead>
         <tr>
-            <th></th>
+            <th scope="col">№</th>
+            <th scope="col">Наименование показателя</th>
+            <th scope="col">Значение</th>
+            <th scope="col">Единица измерения</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (Indicator indicator in @ViewBag.Indicators[0].Indicators)
+        {
+            <tr>
+                <td scope="col">@indicator.TypeIndicator.Number</td>
+                <td>@indicator.TypeIndicator.Name</td>
+                <td>@indicator.Value</td>
+                <td>@indicator.TypeIndicator.UnitMeasure.Name</td>
+            </tr>
+        }
     </tbody>
 </table>
-</body>
-</html>

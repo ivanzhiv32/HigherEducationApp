@@ -1,20 +1,18 @@
-﻿@model HigherEducationApp.Dto.YearReportDto
+﻿@model HigherEducationApp.Models.YearReport
 
 @{
     ViewData["Title"] = "Index";
-    //Layout = "~/Views/YearReport/YearReport.cshtml";
 }
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="~/js/YearReportPlot.js"></script>
-
+<script src="~/js/YearReportPlot.js" asp-append-version="true"></script>
 
 <div class="info" id="res" style="font: normal 400 11px Tahoma;">
     <h1>Характеристика высшего образование в РФ</h1>
 
     <div id="statistic" style="width: 100%; position: relative; margin: 10px 0px 0px;">
         <div class="statistic_info" style="position: relative;padding: 4px 9px;font: 20px / 20px Tahoma;color: rgb(68, 85, 85);left: 0px;" id="statistic_info_all">
-            <span><span class="val">1206</span> организаций высшего образования<sup style="font:9px Calibri;">*</sup>, в том числе:</span>
+            <span><span class="val">1206</span> организаций высшего образования<sup style="font:9px Calibri;"></sup>, в том числе:</span>
             <div style="border-left:10px solid #88b;padding:0px 6px;margin:4px 0px;margin-left:6px;">
                 <span class="val" style="font-size:15px;">510</span> филиалов
             </div>
@@ -51,7 +49,7 @@
             </table>
             <hr style="border:none;border-bottom:1px solid #aaa;margin:0px 9px;">
         </div>
-        
+
         <div class="statistic_info" style="position: relative;padding: 4px 9px;font: 20px / 20px Tahoma;color: rgb(68, 85, 85);left: 0px;" id="statistic_info_chart_kont">
             <div style="border-left:10px solid #88b;padding:0px 6px;margin:4px 0px;margin-left:6px;">
                 <span class="val" style="font-size:15px;">@Model.CountAllStudents</span> студентов, обучающихся по программам высшего образования
@@ -89,118 +87,31 @@
             <div id="piechart" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
         </div>
     </div>
-    <div style="padding:8px 10px 25px;">
-
-        <table id="tregion" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;width:100%;position:relative;">
-            <tbody>
-                <tr>
-                    <td width="33.333%" valign="top" style="width:33.333%;">
-                        <p class="MsoListParagraph"><a href="iam/2023/_vpo/material.php?type=1&amp;id=1">Центральный федеральный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10501">Белгородская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10303">Брянская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10304">Владимирская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10502">Воронежская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10301">г. Москва</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10305">Ивановская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10307">Калужская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10308">Костромская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10503">Курская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10504">Липецкая область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10302">Московская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10309">Орловская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10310">Рязанская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10311">Смоленская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10505">Тамбовская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10306">Тверская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10312">Тульская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10313">Ярославская область</a></p>
-                        <p class="MsoListParagraph"><a href="iam/2023/_vpo/material.php?type=1&amp;id=2">Северо-Западный федеральный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10101">Архангельская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10102">Вологодская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10201">г. Санкт-Петербург</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11200">Калининградская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10202">Ленинградская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10105">Мурманская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10106">Ненецкий автономный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10204">Новгородская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10205">Псковская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10103">Республика Карелия</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10104">Республика Коми</a></p>
-                    </td>
-                    <td width="33.333%" valign="top" style="width:33.333%;">
-                        <p class="MsoListParagraph"><a href="iam/2023/_vpo/material.php?type=1&amp;id=4">Приволжский федеральный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10402">Кировская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10401">Нижегородская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10802">Оренбургская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10604">Пензенская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10803">Пермский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10806">Республика Башкортостан</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10403">Республика Марий Эл</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10404">Республика Мордовия</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10608">Республика Татарстан</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10603">Самарская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10605">Саратовская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10807">Удмуртская Республика</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10606">Ульяновская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10405">Чувашская Республика</a></p>
-                        <p class="MsoListParagraph"><a href="iam/2023/_vpo/material.php?type=1&amp;id=3">Южный федеральный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10601">Астраханская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10602">Волгоградская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11302">г. Севастополь</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10701">Краснодарский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10711">Республика Адыгея</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10607">Республика Калмыкия</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11301">Республика Крым</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10703">Ростовская область</a></p>
-                        <p class="MsoListParagraph"><a href="iam/2023/_vpo/material.php?type=1&amp;id=25">Северо-Кавказский федеральный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10708">Республика Ингушетия</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10705">Кабардино-Балкарская Республика</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10710">Карачаево-Черкесская Республика</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10704">Республика Дагестан</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10706">Республика Северная Осетия-Алания</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10702">Ставропольский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10709">Чеченская Республика</a></p>
-                    </td>
-                    <td width="33.333%" valign="top" style="width:33.333%;">
-                        <p class="MsoListParagraph"><a href="iam/2023/_vpo/material.php?type=1&amp;id=5">Уральский федеральный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10801">Курганская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10804">Свердловская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10906">Тюменская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10908">Ханты-Мансийский автономный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10805">Челябинская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10909">Ямало-Ненецкий автономный округ</a></p>
-                        <p class="MsoListParagraph"><a href="iam/2023/_vpo/material.php?type=1&amp;id=6">Сибирский федеральный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10901">Алтайский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11002">Иркутская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10902">Кемеровская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11001">Красноярский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10903">Новосибирская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10904">Омская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10907">Республика Алтай</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11005">Республика Тыва</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11006">Республика Хакасия</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=10905">Томская область</a></p>
-                        <p class="MsoListParagraph"><a href="iam/2023/_vpo/material.php?type=1&amp;id=7">Дальневосточный федеральный округ</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11103">Амурская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11109">Еврейская автономная область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11003">Забайкальский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11104">Камчатский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11105">Магаданская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11101">Приморский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11004">Республика Бурятия</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11107">Республика Саха (Якутия)</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11106">Сахалинская область</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11102">Хабаровский край</a></p>
-                        <p><a href="iam/2023/_vpo/material.php?type=2&amp;id=11108">Чукотский автономный округ</a></p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-    <h2>Контингент студентов, обучающихся по программам высшего образования: @Model.CountAllStudents</h2>
-    <h2>Очной формы обучения: @Model.CountFullTimeStudents</h2>
-    <h2>За счет бюджетных средств бюджетной системы РФ: @Model.CountFreeFormStudents</h2>
+    <h3>Отчеты субъектов Российской Федерации</h3>
+    <table class="table table-sm">
+        <tbody>
+            <tr>
+                <td>
+                    @for (int i = 0; i < 29; i++)
+                    {
+                        <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
+                    }
+                </td>
+                <td>
+                    @for (int i = 29; i < 58; i++)
+                    {
+                        <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
+                    }
+                </td>
+                <td>
+                    @for (int i = 58; i < Model.RegionReports.Count; i++)
+                    {
+                        <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 

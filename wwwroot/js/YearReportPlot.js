@@ -17,7 +17,7 @@ function drawChart() {
     ]);
 
     var options = {
-        title: 'My Daily Activities',
+        title: 'Распределение студентов по отраслям наук',
         sliceVisibilityThreshold: .00001
     };
 

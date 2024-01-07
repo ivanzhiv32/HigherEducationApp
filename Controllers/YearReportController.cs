@@ -23,9 +23,24 @@ namespace HigherEducationApp.Controllers
         }
 
         // GET: YearReport
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    YearReportDto yearReport = yearReportService.GetYearReport(2023);
+
+        //    return View(yearReport);
+        //}
+        public async Task<IActionResult> Index(int year)
         {
-            YearReportDto yearReport = yearReportService.GetYearReport(2023);
+            if (year < 2015 || year > 2023)
+            {
+                return NotFound();
+            }
+
+            YearReport yearReport = yearReportService.GetYearReport(year);
+            if (yearReport == null)
+            {
+                return NotFound();
+            }
 
             return View(yearReport);
         }
@@ -38,120 +53,13 @@ namespace HigherEducationApp.Controllers
                 return NotFound();
             }
 
-            YearReportDto yearReport = yearReportService.GetYearReport(year);
+            YearReport yearReport = yearReportService.GetYearReport(year);
             if (yearReport == null)
             {
                 return NotFound();
             }
 
             return View(yearReport);
-        }
-
-        // GET: YearReport/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: YearReport/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Year,CountAllStudents,CountFullTimeStudents,CountFreeFormStudents")] YearReport yearReport)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(yearReport);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(yearReport);
-        }
-
-        // GET: YearReport/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var yearReport = await _context.YearReports.FindAsync(id);
-            if (yearReport == null)
-            {
-                return NotFound();
-            }
-            return View(yearReport);
-        }
-
-        // POST: YearReport/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Year,CountAllStudents,CountFullTimeStudents,CountFreeFormStudents")] YearReport yearReport)
-        {
-            if (id != yearReport.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(yearReport);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!YearReportExists(yearReport.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(yearReport);
-        }
-
-        // GET: YearReport/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var yearReport = await _context.YearReports
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (yearReport == null)
-            {
-                return NotFound();
-            }
-
-            return View(yearReport);
-        }
-
-        // POST: YearReport/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var yearReport = await _context.YearReports.FindAsync(id);
-            _context.YearReports.Remove(yearReport);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool YearReportExists(int id)
-        {
-            return _context.YearReports.Any(e => e.Id == id);
         }
     }
 }
