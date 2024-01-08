@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HigherEducationApp.Models
 {
     [Table("values_indicators")]
-    public class Indicator
+    public class Indicator:IComparable<Indicator>
     {
         [Column("id")]
         public int Id { get; set; }
@@ -32,6 +32,20 @@ namespace HigherEducationApp.Models
             Id = id;
             InstitutionReport = institutionReport;
             TypeIndicator = typeIndicator;
+        }
+
+        public int CompareTo(Indicator indicator)
+        {
+            if (indicator == null)
+                return 1;
+            else
+                return this.Value.CompareTo(indicator.Value);
+        }
+
+        public bool Equals(Indicator indicator)
+        {
+            if (indicator == null) return false;
+            return this.Value.Equals(indicator.Value);
         }
     }
 }
