@@ -53,21 +53,24 @@ namespace HigherEducationApp.Services
             }
             
 
-            string[] numbersIndicators = new string[] { };
+            string[] numbersIndicators = new string[] { }; //0.35, 0.2, 0.1, 0.15, 0.1, 0.1
             switch (numGroup) {
-                case 0: 
-                    numbersIndicators = new string[] { "1.1", "1.3", "1.4", "1.5", "1.6", "1.10", "8" };
+                case 0: //Образовательная деятельность
+                    numbersIndicators = new string[] { "2", "1.4", "1.5", "1.6", "1.10", "8" }; 
                     break;
-                case 1: 
-                    numbersIndicators = new string[] { "2.3", "2.6", "2.7", "2.15", "2.16"};
+                case 1: //Научно-исследовательская деятельность
+                    numbersIndicators = new string[] { "2.3", "2.6", "2.7", "2.10", "2.15", "2.16"};
                     break;
-                case 2:
-                    numbersIndicators = new string[] { "3.3", "3.12", "35"};
+                case 2: //Международная деятельность
+                    numbersIndicators = new string[] { "3.3", "3.12", "3.13", "35"};
                     break;
-                case 3:
+                case 3: //Финансово-экономическая деятельность
+                    numbersIndicators = new string[] { "4.4" };
+                    break;
+                case 4: //Инфраструктура
                     numbersIndicators = new string[] { "5.1", "5.6", "5.8"};
                     break;
-                case 4:
+                case 5: //Кадровый состав
                     numbersIndicators = new string[] { "6.4"};
                     break;
             }
@@ -102,19 +105,19 @@ namespace HigherEducationApp.Services
                 instRepRating.Add(institutionReport.Id, 0);
             }
 
-
-            for (int i = 0; i < 5; i++)
+            double[] koefs = new double[6] { 0.35, 0.2, 0.1, 0.15, 0.1, 0.1 };
+            for (int i = 0; i < 6; i++)
             {
                 var ratingGroup = SortIndicatorsByGroup(i);
                 //var x = ratingGroup.ToDictionary<KeyValuePair<int, double>>();
                 foreach (var rating in ratingGroup)
                 {
-                    instRepRating[rating.Key] += ratingGroup.IndexOf(rating) / 5;
+                    instRepRating[rating.Key] += (ratingGroup.IndexOf(rating) * koefs[i]) / 6;
                 }
             }
             var result = instRepRating.ToList();
             result.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
-            var y = result.Find(c => c.Key == 8326);
+            var y = result.Find(c => c.Key == 8232);
             var t = result.IndexOf(y);
             var x = result.Skip(1196);
             return result;
