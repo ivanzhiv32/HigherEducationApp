@@ -28,9 +28,12 @@ namespace HigherEducationApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<HigherEducationSystemDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<HigherEducationSystemDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
+            var connetionString = "server=127.0.0.1;port=3306;username=root;password=dgiva4444;database=new_schema";
+            services.AddDbContext<HigherEducationSystemDbContext>(option =>
+                option.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

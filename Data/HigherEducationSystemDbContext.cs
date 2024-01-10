@@ -126,7 +126,7 @@ namespace HigherEducationApp.Data
             //institution <-> reviewOfInstitution
             modelBuilder.Entity<Institution>()
                 .HasMany(u => u.Reviews)
-                .WithOne(m => m.Institution)
+                .WithOne(c => c.Institution)
                 .HasForeignKey("id_institution")
                 .IsRequired();
 
@@ -177,12 +177,12 @@ namespace HigherEducationApp.Data
                 .HasForeignKey("id_unit_measure")
                 .IsRequired();
 
-            //reviewOfInstitution <-> tonality
-            modelBuilder.Entity<ReviewOfInstitution>()
-                .HasOne(u => u.Tonality)
-                .WithMany()
-                .HasForeignKey("id_tonality")
-                .IsRequired();
+            ////reviewOfInstitution <-> tonality
+            //modelBuilder.Entity<ReviewOfInstitution>()
+            //    .HasOne(u => u.Tonality)
+            //    .WithMany()
+            //    .HasForeignKey("id_tonality")
+            //    .IsRequired();
 
             //distributionUgn <-> ugn
             modelBuilder.Entity<DistributionUgn>()

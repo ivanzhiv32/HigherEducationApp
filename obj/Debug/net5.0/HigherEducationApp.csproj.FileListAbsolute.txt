@@ -184,3 +184,10 @@ D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\Ratin
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Edit.cshtml.g.cs
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\RatingInstitutions\Index.cshtml.g.cs
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\Indicators\IndicatorView.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\ReviewOfInstitutions\Create.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\ReviewOfInstitutions\Delete.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\ReviewOfInstitutions\Details.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\ReviewOfInstitutions\Edit.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\ReviewOfInstitutions\Index.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Text.Encoding.CodePages.dll
