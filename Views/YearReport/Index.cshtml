@@ -6,31 +6,39 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="~/js/YearReportPlot.js" asp-append-version="true"></script>
-
+<div class="list-group list-group-horizontal">
+    @for (int i = 2023; i > 2014; i--)
+    {
+        <a href="YearReport?year=@i"
+           class="list-group-item list-group-item-action text-center">
+            @i
+        </a>
+    }
+</div>
 <div class="info" id="res" style="font: normal 400 11px Tahoma;">
-    <h1>Характеристика высшего образование в РФ</h1>
+    <h1>Характеристика высшего образование в РФ за @Model.Year год</h1>
 
     <div id="statistic" style="width: 100%; position: relative; margin: 10px 0px 0px;">
         <div class="statistic_info" style="position: relative;padding: 4px 9px;font: 20px / 20px Tahoma;color: rgb(68, 85, 85);left: 0px;" id="statistic_info_all">
-            <span><span class="val">1206</span> организаций высшего образования<sup style="font:9px Calibri;"></sup>, в том числе:</span>
+            <span><span class="val">@ViewBag.Indicators[0]</span> организаций высшего образования<sup style="font:9px Calibri;"></sup>, в том числе:</span>
             <div style="border-left:10px solid #88b;padding:0px 6px;margin:4px 0px;margin-left:6px;">
-                <span class="val" style="font-size:15px;">510</span> филиалов
+                <span class="val" style="font-size:15px;">@ViewBag.Indicators[1]</span> филиалов
             </div>
             <div style="border-left:10px solid #c8a;padding:0px 6px;margin:4px 0px;margin-left:6px;">
-                <span class="val" style="font-size:15px;">10</span> федеральных университетов
+                <span class="val" style="font-size:15px;">@ViewBag.Indicators[2]</span> федеральных университетов
             </div>
             <div style="border-left:10px solid #9a8;padding:0px 6px;margin:4px 0px;margin-left:6px;">
-                <span class="val" style="font-size:15px;">29</span> национальных исследовательских университетов
+                <span class="val" style="font-size:15px;">@ViewBag.Indicators[3]</span> национальных исследовательских университетов
             </div>
             <div style="border-left:10px solid #98a;padding:0px 6px;margin:4px 0px;margin-left:6px;">
-                <span class="val" style="font-size:15px;">21</span> участник проекта 5-100
+                <span class="val" style="font-size:15px;">@ViewBag.Indicators[4]</span> участник проекта 5-100
             </div>
             <hr style="border:none;border-bottom:1px solid #aaa;margin:0px 9px;">
             <table style="margin-top:6px;">
                 <tbody>
                     <tr style="">
                         <td style="padding-top:1px;vertical-align:top;font: normal 400 11px/10px Tahoma;text-align:right;">государственных<br>и муниципальных</td>
-                        <td style="vertical-align:top;"><span class="val">898</span></td>
+                        <td style="vertical-align:top;"><span class="val">@ViewBag.Indicators[5]</span></td>
                         <td style="text-align:center;width:104px;">
                             <svg width="104" height="23">
                                 <g transform="translate(2,0)">
@@ -42,7 +50,7 @@
                                 </g>
                             </svg>
                         </td>
-                        <td style="vertical-align:top;text-align:right;"><span class="val">308</span></td>
+                        <td style="vertical-align:top;text-align:right;"><span class="val">@ViewBag.Indicators[6]</span></td>
                         <td style="padding-top:5px;vertical-align:top;font-size:11px;text-align:left;">частных</td>
                     </tr>
                 </tbody>
@@ -88,26 +96,50 @@
         </div>
     </div>
     <h3>Отчеты субъектов Российской Федерации</h3>
-    <table class="table table-sm">
+    <table id="listRegions" class="table table-sm">
         <tbody>
             <tr>
                 <td>
-                    @for (int i = 0; i < 29; i++)
+                    <div class="list-group">
+                        @for (int i = 0; i < 29; i++)
+                        {
+                            <a style="padding-bottom: 5px; padding-top: 5px; margin-bottom: 2px;"
+                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" 
+                               class="list-group-item list-group-item-action">@Model.RegionReports[i].Region.Name</a>
+                        }
+                    </div>
+                    @*@for (int i = 0; i < 29; i++)
                     {
                         <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
-                    }
+                    }*@
                 </td>
                 <td>
-                    @for (int i = 29; i < 58; i++)
+                    <div class="list-group">
+                        @for (int i = 29; i < 58; i++)
+                        {
+                            <a style="padding-bottom: 5px; padding-top: 5px; margin-bottom: 2px;"
+                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" 
+                               class="list-group-item list-group-item-action ">@Model.RegionReports[i].Region.Name</a>
+                        }
+                    </div>
+                    @*@for (int i = 29; i < 58; i++)
                     {
                         <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
-                    }
+                    }*@
                 </td>
                 <td>
-                    @for (int i = 58; i < Model.RegionReports.Count; i++)
+                    <div class="list-group">
+                        @for (int i = 58; i < Model.RegionReports.Count; i++)
+                        {
+                            <a style="padding-bottom: 5px; padding-top: 5px; margin-bottom: 2px;"
+                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" 
+                               class="list-group-item list-group-item-action">@Model.RegionReports[i].Region.Name</a>
+                        }
+                    </div>
+                    @*@for (int i = 58; i < Model.RegionReports.Count; i++)
                     {
                         <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
-                    }
+                    }*@
                 </td>
             </tr>
         </tbody>

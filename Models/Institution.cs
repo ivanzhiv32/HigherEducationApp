@@ -35,6 +35,7 @@ namespace HigherEducationApp.Models
         public virtual List<DistributionUgn> Ugns { get; set; }
         public virtual List<VerificationResult> VerificationResults { get; set; }
         public virtual List<ReviewOfInstitution> Reviews { get; set; }
+        public virtual List<RatingInstitution> Ratings { get; set; }
 
         public Institution()
         {

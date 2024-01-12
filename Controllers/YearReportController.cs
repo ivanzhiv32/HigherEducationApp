@@ -16,6 +16,19 @@ namespace HigherEducationApp.Controllers
     {
         private readonly HigherEducationSystemDbContext _context;
         private YearReportService yearReportService = new YearReportService();
+        private Dictionary<int, int[]> indicatorsDop = new Dictionary<int, int[]>()
+        {
+            {2023, new int[7]{ 1206, 510, 10, 29, 21, 898, 308 } },
+            {2022, new int[7]{ 1208, 510, 10, 29, 21, 896, 312 } },
+            {2021, new int[7]{ 1222, 530, 10, 29, 21, 906, 316 } },
+            {2020, new int[7]{ 1218, 529, 10, 29, 21, 908, 310 } },
+            {2019, new int[7]{ 1264, 555, 10, 29, 21, 920, 344 } },
+            {2018, new int[7]{ 1314, 583, 10, 29, 21, 939, 375 } },
+            {2017, new int[7]{ 769, 692, 0, 0, 0, 0, 0 } },
+            {2016, new int[7]{ 830, 932, 0, 0, 0, 0, 0 } },
+            {2015, new int[7]{ 901, 1232, 0, 0, 0, 0, 0 } }
+        };
+
 
         public YearReportController(HigherEducationSystemDbContext context)
         {
@@ -37,6 +50,7 @@ namespace HigherEducationApp.Controllers
             }
 
             YearReport yearReport = yearReportService.GetYearReport(year);
+            ViewBag.Indicators = indicatorsDop[year];
             if (yearReport == null)
             {
                 return NotFound();

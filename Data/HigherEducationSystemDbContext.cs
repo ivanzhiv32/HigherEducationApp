@@ -32,6 +32,7 @@ namespace HigherEducationApp.Data
         public DbSet<VerificationResult> VerificationResults { get; set; }
         public DbSet<Tonality> Tonalities { get; set; }
         public DbSet<ReviewOfInstitution> ReviewsOfInstitution { get; set; }
+        public DbSet<RatingInstitution> RatingInstitutions { get; set; }
         //public DbSet<User> Users { get; set; }
         //public DbSet<Admin> Admins { get; set; }
         //public DbSet<Applicant> Applicants { get; set; }
@@ -137,6 +138,13 @@ namespace HigherEducationApp.Data
                 .HasForeignKey("id_institution")
                 .IsRequired();
 
+            //institution <-> ratingInstitution
+            modelBuilder.Entity<Institution>()
+                .HasMany(c => c.Ratings)
+                .WithOne(c => c.Institution)
+                .HasForeignKey("id_institution")
+                .IsRequired();
+
             //institutionReport <-> indicators
             //modelBuilder.Entity<InstitutionReport>()
             //    .HasMany(u => u.Indicators)
@@ -177,20 +185,14 @@ namespace HigherEducationApp.Data
                 .HasForeignKey("id_unit_measure")
                 .IsRequired();
 
-            ////reviewOfInstitution <-> tonality
-            //modelBuilder.Entity<ReviewOfInstitution>()
-            //    .HasOne(u => u.Tonality)
-            //    .WithMany()
-            //    .HasForeignKey("id_tonality")
-            //    .IsRequired();
-
             //distributionUgn <-> ugn
             modelBuilder.Entity<DistributionUgn>()
                 .HasOne(u => u.Ugn)
                 .WithMany()
                 .HasForeignKey("id_ugn")
                 .IsRequired();
+
         }
-        public DbSet<HigherEducationApp.Models.RatingInstitution> RatingInstitution { get; set; }
+        
     }
 }

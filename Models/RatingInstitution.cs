@@ -29,5 +29,12 @@ namespace HigherEducationApp.Models
         public RatingInstitution()
         {
         }
+
+        public RatingInstitution(Institution institution, YearReport yearReport, double rating)
+        {
+            Institution = institution;
+            YearReport = yearReport;
+            Rating = rating;
+        }
     }
 }

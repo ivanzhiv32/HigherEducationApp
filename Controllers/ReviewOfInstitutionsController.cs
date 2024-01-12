@@ -15,6 +15,12 @@ namespace HigherEducationApp.Controllers
     {
         private readonly HigherEducationSystemDbContext _context;
         private ReviewService reviewService = new ReviewService();
+        private Dictionary<int, string> tonalityColor = new Dictionary<int, string>() 
+        { 
+            { 1, "#F3F8E7" }, 
+            { 2, "#F8EBEB" }, 
+            { 3, "#F8F3E1" } 
+        };
 
         public ReviewOfInstitutionsController(HigherEducationSystemDbContext context)
         {
@@ -22,24 +28,28 @@ namespace HigherEducationApp.Controllers
         }
 
         // GET: ReviewOfInstitutions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int count)
         {
-            var reviews = reviewService.AddReview();
+            List<ReviewOfInstitution> reviews = reviewService.GetReviews(count);
+            ViewBag.Institutions = _context.Institutions.ToList();
+            ViewBag.TonalityColor = tonalityColor;
 
-
-            return View(await _context.ReviewsOfInstitution.ToListAsync());
+            return View(reviews);
         }
 
-        // GET: ReviewOfInstitutions/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: ReviewOfInstitutions/Institution/5
+        public async Task<IActionResult> Institution(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var reviewOfInstitution = await _context.ReviewsOfInstitution
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var reviewOfInstitution = _context.ReviewsOfInstitution
+                .Where(c => c.Institution.Id == id).ToList();
+            ViewBag.Institution = _context.Institutions.FirstOrDefault(c => c.Id == id);
+            ViewBag.TonalityColor = tonalityColor;
+
             if (reviewOfInstitution == null)
             {
                 return NotFound();

@@ -38,6 +38,16 @@
 
 
 <div>
+    <div class="list-group list-group-horizontal">
+        @foreach (var report in ViewBag.Indicators)
+        {
+            <a 
+               href="InstitutionReport?id=@report.Id&year=@report.Year.Year" 
+               class="list-group-item list-group-item-action text-center">
+               @report.Year.Year
+            </a>
+        }
+    </div>
     <h3>I. Общие сведения</h3>
     <table class="table table-striped-columns">
         <tbody>

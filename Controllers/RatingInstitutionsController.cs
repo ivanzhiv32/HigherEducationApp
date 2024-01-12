@@ -22,10 +22,12 @@ namespace HigherEducationApp.Controllers
         }
 
         // GET: RatingInstitutions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int year)
         {
-            ratingService.GetRatingInstitutions();
-            return View(await _context.RatingInstitution.ToListAsync());
+            var ratings = ratingService.GetRatingInstitutions(year);
+            ViewBag.Year = year;
+
+            return View(ratings);
         }
     }
 }

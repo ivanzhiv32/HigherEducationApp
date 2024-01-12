@@ -14,9 +14,33 @@ namespace HigherEducationApp.Services
     class ReviewService
     {
         string path = "D:\\Учеба\\Диплом\\HigherEducationApp\\Files\\feedbacks_clear.csv";
+
+        public List<ReviewOfInstitution> GetReviews(int count)
+        {
+            using(HigherEducationSystemDbContext educationSystemDbContext = new HigherEducationSystemDbContext())
+            {
+                var reviews = educationSystemDbContext.ReviewsOfInstitution
+                    .Include(c => c.Institution).Take(count).ToList();
+
+                return reviews;
+            }
+        }
+
+        public List<ReviewOfInstitution> GetReviewsByInstitution(int idInstitution)
+        {
+            using (HigherEducationSystemDbContext educationSystemDbContext = new HigherEducationSystemDbContext())
+            {
+                var reviews = educationSystemDbContext.ReviewsOfInstitution
+                    .Include(c => c.Institution)
+                    .Where(c => c.Institution.Id == idInstitution)
+                    .ToList();
+
+                return reviews;
+            }
+        }
         public List<ReviewOfInstitution> AddReview()
         {
-            List<string[]> reviews = GetReviews();
+            List<string[]> reviews = ParseReviews();
             List<ReviewOfInstitution> result = new List<ReviewOfInstitution>();
 
             int index = 0;
@@ -49,7 +73,7 @@ namespace HigherEducationApp.Services
             return result;
         }
 
-        public List<string[]> GetReviews()
+        public List<string[]> ParseReviews()
         {
             List<string[]> reviews = new List<string[]>();
             using (var reader = new StreamReader(path, Encoding.GetEncoding(1251)))

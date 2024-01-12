@@ -1,43 +1,38 @@
-﻿@model IEnumerable<HigherEducationApp.Models.RatingInstitution>
+﻿@model List<HigherEducationApp.Models.RatingInstitution>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+<div>
+    <div class="list-group list-group-horizontal">
+        @for (int i = 2023; i > 2014; i--)
+        {
+            <a 
+               href="RatingInstitutions?year=@i" 
+               class="list-group-item list-group-item-action text-center">
+               @i
+            </a>
+        }
+    </div>
+    <h1>Рейтинг лучших вузов России, @ViewBag.Year год</h1>
+    <table class="table mx-auto w-75">
+        <thead>
+            <tr>
+                <th scope="col">Место</th>
+                <th scope="col">Название</th>
+                <th scope="col">Рейтинг</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (RatingInstitution rating in Model)
+            {
+            <tr>
+                <td>@Model.IndexOf(rating)</td>
+                <td><a href="InstitutionReport?id=@rating.Institution.Id&year=@rating.YearReport.Year">@rating.Institution.Name</a></td>
+                <td>@rating.Rating</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

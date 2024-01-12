@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="YearReport" asp-action="Index">Высшее образование</a>
+                <a class="navbar-brand" asp-area="" asp-controller="YearReport" asp-action="Index" asp-route-year="2023">Высшее образование</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,10 +25,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="FindInstitution" asp-action="Index">Поиск ВУЗа</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Rating" asp-action="Index">Рейтинг ВУЗов</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="RatingInstitutions" asp-action="Index" asp-route-year="2023">Рейтинг ВУЗов</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Review" asp-action="Index">Отзывы о ВУЗах</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ReviewOfInstitutions" asp-action="Index" asp-route-count="20">Отзывы о ВУЗах</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
