@@ -21,7 +21,10 @@
             <tr>
                 <th scope="col">Место</th>
                 <th scope="col">Название</th>
-                <th scope="col">Рейтинг</th>
+                <th scope="col">Общий<br />рейтинг<br />(балл)</th>
+                <th scope="col">Рейтинг<br />образования<br />(место)</th>
+                <th scope="col">Рейтинг<br />науки<br />(место)</th>
+                <th scope="col">Рейтинг<br />финансов<br />(место)</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -30,7 +33,10 @@
             <tr>
                 <td>@Model.IndexOf(rating)</td>
                 <td><a href="InstitutionReport?id=@rating.Institution.Id&year=@rating.YearReport.Year">@rating.Institution.Name</a></td>
-                <td>@rating.Rating</td>
+                <td>@Math.Round(rating.Rating, 2)</td>
+                <td>@rating.RatingEducation</td>
+                <td>@rating.RatingScience</td>
+                <td>@rating.RatingFinance</td>
             </tr>
             }
         </tbody>

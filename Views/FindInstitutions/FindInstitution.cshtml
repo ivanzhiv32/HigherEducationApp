@@ -1,0 +1,11 @@
+﻿@model List<HigherEducationApp.Models.Institution>
+
+<div id="searchresults">
+    <h3>Найденные институты:</h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item.Name</li>
+        }
+    </ul>
+</div>

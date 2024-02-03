@@ -17,6 +17,12 @@ namespace HigherEducationApp.Models
         public YearReport YearReport { get; set; }
         [Column("rating")]
         public double Rating { get; set; }
+        [Column("rating_education")]
+        public int? RatingEducation { get; set; }
+        [Column("rating_science")]
+        public int? RatingScience { get; set; }
+        [Column("rating_finance")]
+        public int? RatingFinance { get; set; }
 
         public RatingInstitution(int id, Institution institution, YearReport yearReport, double rating)
         {
@@ -35,6 +41,13 @@ namespace HigherEducationApp.Models
             Institution = institution;
             YearReport = yearReport;
             Rating = rating;
+        }
+
+        public RatingInstitution(Institution institution, YearReport yearReport, double rating, int ratingEducation, int ratingScience, int ratingFinance) : this(institution, yearReport, rating)
+        {
+            RatingEducation = ratingEducation;
+            RatingScience = ratingScience;
+            RatingFinance = ratingFinance;
         }
     }
 }

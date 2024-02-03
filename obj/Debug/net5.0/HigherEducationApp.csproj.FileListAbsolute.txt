@@ -191,3 +191,17 @@ D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\Revie
 D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
 D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Text.Encoding.CodePages.dll
 D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\ReviewOfInstitutions\Institution.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\FindInstitutions\Create.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\FindInstitutions\Delete.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\FindInstitutions\Details.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\FindInstitutions\Edit.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\FindInstitutions\Index.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\obj\Debug\net5.0\Razor\Views\FindInstitutions\FindInstitution.cshtml.g.cs
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\libman.json
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Web.Mvc.dll
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Web.Razor.dll
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Web.Helpers.dll
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\System.Web.WebPages.dll
+D:\Учеба\Диплом\HigherEducationApp\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll

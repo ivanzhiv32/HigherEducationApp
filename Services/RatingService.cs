@@ -148,9 +148,27 @@ namespace HigherEducationApp.Services
                 //double[] koefs = new double[5] { 0.5, 0.25, 0.15, 0.05, 0.05 };
                 //double[] koefs = new double[6] { 0.45, 0.25, 0.1, 0.1, 0.05, 0.05 };
                 //double[] koefs = new double[7] { 0.4, 0.25, 0.05, 0.15, 0.05, 0.05, 0.05 };
+
+                List<KeyValuePair<int, double>> ratingEducation = new List<KeyValuePair<int, double>>();
+                List<KeyValuePair<int, double>> ratingScince = new List<KeyValuePair<int, double>>();
+                List<KeyValuePair<int, double>> ratingFinance = new List<KeyValuePair<int, double>>();
+
                 for (int i = 0; i < koefs.Length - 1; i++)
                 {
                     var ratingGroup = SortIndicatorsByGroup(i, year);
+                    switch (i)
+                    {
+                        case 0: 
+                            ratingEducation = ratingGroup;
+                            break;
+                        case 1:
+                            ratingScince = ratingGroup;
+                            break;
+                        case 3:
+                            ratingFinance = ratingGroup;
+                            break;
+                    }
+                        
                     foreach (var rating in ratingGroup)
                     {
                         instRepRating[rating.Key] += (ratingGroup.IndexOf(rating) * koefs[i]) / koefs.Length;
@@ -166,13 +184,34 @@ namespace HigherEducationApp.Services
                 var result = instRepRating.ToList();
                 result.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
 
+                var x = result.Skip(1200);
+
+                //foreach (var report in institutionReports)
+                //{
+                //    var rating = result.Where(c => c.Key == report.Id);
+
+                //    foreach (var item in rating)
+                //    {
+                //        report.Institution.Ratings.Add(new RatingInstitution(report.Institution, report.Year, item.Value));
+                //    }
+                //    educationSystemContext.SaveChanges();
+                //}
                 foreach (var report in institutionReports)
                 {
-                    var rating = result.Where(c => c.Key == report.Id);
-                    foreach (var item in rating)
-                    {
-                        report.Institution.Ratings.Add(new RatingInstitution(report.Institution, report.Year, item.Value));
-                    }
+                    var rating = result.FirstOrDefault(c => c.Key == report.Id);
+                    var ratingEdu = ratingEducation.FirstOrDefault(c => c.Key == report.Id);
+                    var ratingSci = ratingScince.FirstOrDefault(c => c.Key == report.Id);
+                    var ratingFin = ratingFinance.FirstOrDefault(c => c.Key == report.Id);
+
+                    report.Institution.Ratings.Add(new RatingInstitution(
+                        report.Institution, 
+                        report.Year, 
+                        rating.Value,
+                        ratingEducation.Count() - ratingEducation.IndexOf(ratingEdu),
+                        ratingScince.Count() - ratingScince.IndexOf(ratingSci),
+                        ratingFinance.Count() - ratingFinance.IndexOf(ratingFin)
+                        ));
+
                     educationSystemContext.SaveChanges();
                 }
             }
@@ -185,23 +224,29 @@ namespace HigherEducationApp.Services
         {
             using (HigherEducationSystemDbContext educationSystemDbContext = new HigherEducationSystemDbContext())
             {
-                List<RatingInstitution> ratings = educationSystemDbContext.RatingInstitutions
+                //List<RatingInstitution> ratings = educationSystemDbContext.RatingInstitutions
+                //    .Include(c => c.Institution)
+                //    .Include(c => c.YearReport)
+                //    .Where(c => c.YearReport.Year == 1000)
+                //    .OrderByDescending(c => c.Rating)
+                //    .ToList();
+                var ratings = educationSystemDbContext.RatingInstitutions
                     .Include(c => c.Institution)
                     .Include(c => c.YearReport)
                     .Where(c => c.YearReport.Year == year)
-                    .OrderByDescending(c => c.Rating)
-                    .ToList();
-                if(ratings.Count == 0)
-                {
-                    AddRatingInstitutions(year);
-                    ratings = educationSystemDbContext.RatingInstitutions
-                        .Include(c => c.Institution)
-                        .Include(c => c.YearReport)
-                        .Where(c => c.YearReport.Year == year)
-                        .OrderByDescending(c => c.Rating)
-                        .ToList();
-                }
-                return ratings;
+                    .OrderByDescending(c => c.Rating);
+
+                //if (ratings.Count == 0)
+                //{
+                //    AddRatingInstitutions(year);
+                //    ratings = educationSystemDbContext.RatingInstitutions
+                //        .Include(c => c.Institution)
+                //        .Include(c => c.YearReport)
+                //        .Where(c => c.YearReport.Year == year)
+                //        .OrderByDescending(c => c.Rating)
+                //        .ToList();
+                //}
+                return ratings.ToList();
             }
         }
     }

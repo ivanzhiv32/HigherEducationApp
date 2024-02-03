@@ -73,9 +73,39 @@ namespace HigherEducationApp.Services
             }
         }
 
-        public List<DistributionBranches> GetBranchesOfScince(int id, int year)
+        public RegionBranchScienseDto GetBranchesOfScince(int id, int year)
         {
-            return null;
+            RegionBranchScienseDto dto = new RegionBranchScienseDto();
+            using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
+            {
+                List<InstitutionReport> institutionReports = educationSystemContext.InstitutionReports
+                    .Include(c => c.DistributionBranches).ThenInclude(c => c.BranchScience)
+                    .Where(c => c.Institution.Region.Id == id)
+                    .Where(c => c.Year.Year == year).ToList();
+                List<DistributionBranches> branches = new List<DistributionBranches>();
+                foreach (var institution in institutionReports)
+                {
+                    foreach (var branch in institution.DistributionBranches)
+                    {
+                        branches.Add(branch);
+                    }
+                }
+
+                dto = new RegionBranchScienseDto()
+                {
+                    Social = branches.Where(c => c.BranchScience.Id == 5).Sum(c => c.Value),
+                    Education = branches.Where(c => c.BranchScience.Id == 6).Sum(c => c.Value),
+                    Humanitarian = branches.Where(c => c.BranchScience.Id == 7).Sum(c => c.Value),
+                    Culture = branches.Where(c => c.BranchScience.Id == 8).Sum(c => c.Value),
+                    Math = branches.Where(c => c.BranchScience.Id == 10).Sum(c => c.Value),
+                    Engineer = branches.Where(c => c.BranchScience.Id == 2).Sum(c => c.Value),
+                    Medicine = branches.Where(c => c.BranchScience.Id == 3).Sum(c => c.Value),
+                    Village = branches.Where(c => c.BranchScience.Id == 4).Sum(c => c.Value),
+
+                };
+            }
+            
+            return dto;
         }
     }
 }

@@ -15,6 +15,14 @@ namespace HigherEducationApp.Controllers
     {
         private readonly HigherEducationSystemDbContext _context;
         private InstitutionReportService institutionReportService = new InstitutionReportService();
+        private Dictionary<int, double> averageEGERus = new Dictionary<int, double>()
+        {
+            {2023,  63.87},
+            {2022,  63.62},
+            {2021,  63.31},
+            {2020,  62.3},
+            {2019,  59.85}
+        };
 
         public InstitutionReportController(HigherEducationSystemDbContext context)
         {
@@ -29,8 +37,18 @@ namespace HigherEducationApp.Controllers
                 return NotFound();
             }
 
+            var minEGERus = institutionReportService.GetMinScoreRus(id);
+            var averageEGE = institutionReportService.GetAverageScore(id);
+            var minEGE = institutionReportService.GetMinScore(id);
+
             var institutionReport = institutionReportService.GetInstitutionReport(id, year);
+            
             //var institutionReports = institutionReportService.GetInstitutionReports(id, year);
+            ViewBag.AverageEGERus = averageEGERus;
+            ViewBag.AverageEGE = averageEGE;
+            ViewBag.MinEGE = minEGE;
+            ViewBag.MinEGERus = minEGERus;
+            ViewBag.Institution = institutionReportService.GetInstitution(id);
             ViewBag.Branches = institutionReportService.GetBranchesScience(institutionReport.Id);
             ViewBag.Ugns = institutionReportService.GetUgns(id);
 

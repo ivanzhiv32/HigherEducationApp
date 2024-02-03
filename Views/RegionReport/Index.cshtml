@@ -4,8 +4,8 @@
     ViewData["Title"] = "Index";
 }
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="~/js/YearReportPlot.js"></script>
-<script type="text/javascript">
+@*<script src="~/js/YearReportPlot.js"></script>*@
+<script>
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(drawChart);
 
@@ -13,19 +13,18 @@
 
         var data = google.visualization.arrayToDataTable([
             ['Направление', 'Кол-во студентов'],
-            ['Гуманитарные науки', @Model.CountAllStudents],
-            ['Искусство и культура', 89226],
-            ['Оборона и безопасность государства, военные науки', 64],
-            ['Математические и естественные науки', 172926],
-            ['Инженерное дело, технологии и технические науки', 901026],
-            ['Здравоохранение и медицинские науки', 335333],
-            ['Сельское хозяйство и сельскохозяйственные науки', 111652],
-            ['Науки об обществе', 793967],
-            ['Образование и педагогические науки', 262305]
+            ['Науки об обществе', parseInt(@ViewBag.BranchScience.Social)],
+            ['Образование и педагогические науки', parseInt(@ViewBag.BranchScience.Education)],
+            ['Гуманитарные науки', parseInt(@ViewBag.BranchScience.Humanitarian)],
+            ['Искусство и культура', parseInt(@ViewBag.BranchScience.Culture)],
+            ['Математические и естественные науки', parseInt(@ViewBag.BranchScience.Math)],
+            ['Инженерное дело, технологии и технические науки', parseInt(@ViewBag.BranchScience.Engineer)],
+            ['Здравоохранение и медицинские науки', parseInt(@ViewBag.BranchScience.Medicine)],
+            ['Сельское хозяйство и сельскохозяйственные науки', parseInt(@ViewBag.BranchScience.Village)]
         ]);
 
         var options = {
-            title: 'My Daily Activities',
+            title: '',
             sliceVisibilityThreshold: .00001
         };
 
@@ -68,9 +67,12 @@
                 <span class="val" style="font-size:15px;">@Model.CountFreeFormStudents</span> студентов за счет бюджетных средств бюджетной системы РФ
             </div>
             <hr style="border:none;border-bottom:1px solid #aaa;margin:0px 9px;">
-            <div id="piechart" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+
         </div>
     </div>
+    <h3>Распределение студентов по отраслям наук</h3>
+    <div id="piechart" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+    <hr>
     <h3>Список образовательных организаций</h3>
     <div class="list-group">
         @foreach (Institution institution in Model.Region.Institutions)

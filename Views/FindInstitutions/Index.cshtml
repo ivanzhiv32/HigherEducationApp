@@ -1,0 +1,28 @@
+﻿@model List<HigherEducationApp.Models.Institution>
+
+@{
+    ViewData["Title"] = "Поиск вуза";
+}
+
+<div>
+    <form action="/FindInstitutions/FindInstitution" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="form0" method="post">
+        <input type="text" name="name" />
+        <input type="submit" value="Поиск" />
+    </form>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Название вуза</span>
+        <input type="text" class="form-control" aria-label="Пример размера поля ввода" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Направление</label>
+        <select class="form-select" id="inputGroupSelect01">
+            <option selected>Выберите...</option>
+            <option value="1">Математика</option>
+            <option value="2">Биология</option>
+            <option value="3">Физика</option>
+        </select>
+    </div>
+
+    <div id="results"></div>
+</div>
+

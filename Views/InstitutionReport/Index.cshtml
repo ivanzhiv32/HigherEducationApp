@@ -8,43 +8,155 @@
 }
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart'] });
+<script src="~/js/StudentsWithoutDormitory.js" asp-append-version="true"></script>
+@*<script src="~/js/ScoresEGE.js" asp-append-version="true"></script>*@
+<script>
+    google.charts.load('current', { 'packages': ['line'] });
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Направление', 'Кол-во студентов'],
-            ["dgsdg", ],
-            ["sdfsd", 111],
-            ["dsfsdf", 111],
-            ["dsgfds", 111],
-            ["fsdfa", 111],
-            ["fsdf", 111],
-            ["fsdf", 111],
-            ["fsdf", 111]
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Год');
+        data.addColumn('number', 'Средний балл ЕГЭ');
+        data.addColumn('number', 'Средний балл в РФ');
+
+        data.addRows([
+            [2019, @ViewBag.AverageEGE[2019],  59.85],
+            [2020, @ViewBag.AverageEGE[2020],  62.3],
+            [2021, @ViewBag.AverageEGE[2021],  63.31],
+            [2022, @ViewBag.AverageEGE[2022],  63.62],
+            [2023, @ViewBag.AverageEGE[2023],  63.87]
         ]);
 
         var options = {
-            title: 'My Daily Activities',
-            sliceVisibilityThreshold: .00001
+            displayAnnotations: true,
+            width: 850,
+            height: 500
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart = new google.charts.Line(document.getElementById('scoresEGE'));
 
-        chart.draw(data, options);
+        chart.draw(data, google.charts.Line.convertOptions(options));
     }
 </script>
+<script>
+    google.charts.load('current', { 'packages': ['line'] });
+    google.charts.setOnLoadCallback(drawChart);
 
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Год');
+        data.addColumn('number', 'Минимальный балл ЕГЭ');
+        data.addColumn('number', 'Минимальный балл в РФ');
+
+        data.addRows([
+            [2019, @ViewBag.MinEGE[2019], 42.13],
+            [2020, @ViewBag.MinEGE[2020], 42.86],
+            [2021, @ViewBag.MinEGE[2020], 49.36],
+            [2022, @ViewBag.MinEGE[2022], 43.84],
+            [2023, @ViewBag.MinEGE[2023], 43.86]
+        ]);
+
+        var options = {
+            displayAnnotations: true,
+            width: 850,
+            height: 500
+        };
+
+        var chart = new google.charts.Line(document.getElementById('scoresMinEGE'));
+
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+</script>
+<script src="~/js/VolumeNIOKR.js" asp-append-version="true"></script>
+@*<script src="~/js/DistributionOfStudents.js" asp-append-version="true"></script>*@
+<script>
+google.charts.load('current', { 'packages': ['bar'] });
+google.charts.setOnLoadCallback(drawStuff);
+
+function drawStuff() {
+    var data = new google.visualization.arrayToDataTable([
+        ['Отрасль науки', 'Кол-во студентов'],
+        ["Математические и естественные науки", parseInt(@ViewBag.Branches[0].Value)],
+        ["Инженерное дело, технологии и технические науки", parseInt(@ViewBag.Branches[1].Value)],
+        ["Здравоохранение и медицинские науки", parseInt(@ViewBag.Branches[2].Value)],
+        ["Сельское хозяйство и сельскохозяйственные науки", parseInt(@ViewBag.Branches[3].Value)],
+        ['Науки об обществе', parseInt(@ViewBag.Branches[4].Value)],
+        ["Образование и педагогические науки", parseInt(@ViewBag.Branches[5].Value)],
+        ["Гуманитарные науки", parseInt(@ViewBag.Branches[6].Value)],
+        ["Искусство и культура", parseInt(@ViewBag.Branches[7].Value)]
+    ]);
+
+    var options = {
+        width: 900,
+        legend: { position: 'none' },
+        chart: {
+            title: '',
+        },
+        bars: 'horizontal', // Required for Material Bar Charts.
+        axes: {
+            x: {
+                0: { side: 'top', label: 'Количество студентов' } // Top x-axis.
+            }
+        },
+        bar: { groupWidth: "90%" }
+    };
+
+    var chart = new google.charts.Bar(document.getElementById('distributionOfStudents'));
+    chart.draw(data, options);
+};
+</script>
+@*<script src="~/js/UGN.js" asp-append-version="true"></script>*@
+
+<script>
+    google.charts.load('current', { 'packages': ['bar'] });
+    google.charts.setOnLoadCallback(drawStuff);
+
+    function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+            ['Реализуемые УГН(С)', 'Количество студентов'],
+            ["02.00.00 - Компьютерные и информационные науки", 72],
+            ["09.00.00 - Информатика и вычислительная техника", 817],
+            ["10.00.00 - Информационная безопасность", 435],
+            ["11.00.00 - Электроника, радиотехника и системы связи", 177],
+            ['13.00.00 - Электро- и теплоэнергетика', 473],
+            ["15.00.00 - Машиностроение", 729],
+            ["20.00.00 - Техносферная безопасность и природообустройство", 84],
+            ["22.00.00 - Технологии материаловИскусство и культура", 54],
+            ["23.00.00 - Техника и технологии наземного транспорта", 305],
+            ["27.00.00 - Управление в технических системах", 205],
+            ["38.00.00 - Экономика и управление", 208],
+            ["44.00.00 - Образование и педагогические науки", 38]
+        ]);
+        var options = {
+            width: 900,
+            legend: { position: 'none' },
+            chart: {
+                title: '',
+            },
+            bars: 'horizontal', // Required for Material Bar Charts.
+            axes: {
+                x: {
+                    0: { side: 'top', label: "Количество студентов" } // Top x-axis.
+                }
+            },
+            bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('ugns'));
+        chart.draw(data, options);
+    };
+</script>
 
 <div>
     <div class="list-group list-group-horizontal">
         @foreach (var report in ViewBag.Indicators)
         {
-            <a 
-               href="InstitutionReport?id=@report.Id&year=@report.Year.Year" 
+            <a href="InstitutionReport?id=@report.Id&year=@report.Year.Year"
                class="list-group-item list-group-item-action text-center">
-               @report.Year.Year
+                @report.Year.Year
             </a>
         }
     </div>
@@ -53,70 +165,101 @@
         <tbody>
             <tr>
                 <td class="table-light">Наименование образовательной организации</td>
-                <td><b style="font-family:Cambria;">@Model.Institution.Name</b></td>
+                <td><b style="font-family:Cambria;">@ViewBag.Institution.Name</b></td>
             </tr>
             <tr>
                 <td class="table-light">Регион,<br>адрес</td>
-                <td><a href="">@Model.Institution.Region.Name</a><br><span>@Model.Institution.Adress</span></td>
+                <td><a href="">@ViewBag.Institution.Region.Name</a><br><span>@ViewBag.Institution.Adress</span></td>
             </tr>
             <tr>
                 <td class="table-light">Ведомственная принадлежность</td>
-                <td>@Model.Institution.Department</td>
+                <td>@ViewBag.Institution.Department</td>
             </tr>
             <tr>
                 <td class="table-light">web-сайт</td>
-                <td>@Model.Institution.Site</td>
+                <td>@ViewBag.Institution.Site</td>
             </tr>
             <tr>
                 <td class="table-light">Учредитель(и)</td>
-                <td>@Model.Institution.Founder</td>
+                <td>@ViewBag.Institution.Founder</td>
             </tr>
         </tbody>
     </table>
 </div>
+<div>
+    <h3>II. Образовательная деятельность</h3>
+    <hr>
+    <div class="mb-5" style="height: 500px">
+        <h5>Динамика изменения баллов ЕГЭ абитуриентов</h5>
+        <div id="scoresEGE" style="width: 100%;height: 100%;padding-top: 15px;position: relative;" data-role="chart"></div>
+    </div>
+    <hr>
+    <div class="mb-5" style="height: 500px">
+        <h5>Динамика изменения минимальных баллов ЕГЭ абитуриентов</h5>
+        <div id="scoresMinEGE" style="width: 100%;height: 100%;padding-top: 15px;position: relative;" data-role="chart"></div>
+    </div>
+    <hr>
+    <h3>III. Научно-исследовательская деятельность</h3>
+    <hr>
+    <div class="mb-5" style="height: 500px">
+        <h4>Объем НИОКР, тыс.руб.</h4>
+        <div id="volumeNIOKR" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+    </div> 
+    
+    <hr>
+    <div id="dormitory" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+</div>
 <div @*id="branchesScience"*@>
     <h3 @*class="text-center"*@>II. Распределение контингента студентов образовательной организации</h3>
+
     <hr>
     <h6 class="ml-3">В образовательной организации обучается <strong>@Model.Indicators.Find(c => c.TypeIndicator.Number == "1").Value</strong> студента бакалавриата, специалитета, магистратуры</h6>
     <h6 class="ml-3">в т.ч. <strong>@Model.Indicators.Find(c => c.TypeIndicator.Number == "100").Value</strong> очной формы обучения</h6>
     <hr>
-    <table class="table mx-auto w-75">
-        <thead>
-            <tr>
-                <th scope="col">Отрасль науки</th>
-                <th scope="col">Контингент студентов</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            @foreach (DistributionBranches distributionBranches in @ViewBag.Branches)
-            {
-                <tr>
-                    <td>@distributionBranches.BranchScience.Name</td>
-                    <td><strong>@distributionBranches.Value</strong> чел.</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <h5>Развиваемые научные отрасли</h5>
+    <div id="distributionOfStudents" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
     <hr>
-    <table class="table mx-auto w-75">
-        <thead>
-            <tr>
-                <th scope="col">Реализуемые УГН(С)</th>
-                <th scope="col">Контингент студентов</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (DistributionUgn distributionUgn in @ViewBag.Ugns)
-            {
-                <tr>
-                    <td style="text-align:left;min-width:350px;">@distributionUgn.Ugn.Name</td>
-                    <td><strong>@distributionUgn.CountStudents</strong> чел.</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <h5>Реализуемые специальности в организации</h5>
+    <div id="ugns" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
     <hr>
+    @*<table class="table mx-auto w-75">
+            <thead>
+                <tr>
+                    <th scope="col">Отрасль науки</th>
+                    <th scope="col">Контингент студентов</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                @foreach (DistributionBranches distributionBranches in @ViewBag.Branches)
+                {
+                    <tr>
+                        <td>@distributionBranches.BranchScience.Name</td>
+                        <td><strong>@distributionBranches.Value</strong> чел.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr>
+        <table class="table mx-auto w-75">
+            <thead>
+                <tr>
+                    <th scope="col">Реализуемые УГН(С)</th>
+                    <th scope="col">Контингент студентов</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DistributionUgn distributionUgn in @ViewBag.Ugns)
+                {
+                    <tr>
+                        <td style="text-align:left;min-width:350px;">@distributionUgn.Ugn.Name</td>
+                        <td><strong>@distributionUgn.CountStudents</strong> чел.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr>*@
 </div>
+
 
 <table class="table">
     <thead>

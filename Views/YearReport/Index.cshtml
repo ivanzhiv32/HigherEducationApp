@@ -5,7 +5,35 @@
 }
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="~/js/YearReportPlot.js" asp-append-version="true"></script>
+@*<script src="~/js/YearReportPlot.js" asp-append-version="true"></script>*@
+<script>
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Направление', 'Кол-во студентов'],
+            ['Науки об обществе', parseInt(@ViewBag.BranchScience[0])],
+            ['Образование и педагогические науки', parseInt(@ViewBag.BranchScience[1])],
+            ['Гуманитарные науки', parseInt(@ViewBag.BranchScience[2])],
+            ['Искусство и культура', parseInt(@ViewBag.BranchScience[3])],
+            ['Математические и естественные науки', parseInt(@ViewBag.BranchScience[4])],
+            ['Инженерное дело, технологии и технические науки', parseInt(@ViewBag.BranchScience[5])],
+            ['Здравоохранение и медицинские науки', parseInt(@ViewBag.BranchScience[6])],
+            ['Сельское хозяйство и сельскохозяйственные науки', parseInt(@ViewBag.BranchScience[7])]
+        ]);
+
+        var options = {
+            title: '',
+            sliceVisibilityThreshold: .00001
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+</script>
 <div class="list-group list-group-horizontal">
     @for (int i = 2023; i > 2014; i--)
     {
@@ -92,9 +120,11 @@
                 </tbody>
             </table>
             <hr style="border:none;border-bottom:1px solid #aaa;margin:0px 9px;">
-            <div id="piechart" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+
         </div>
     </div>
+    <h3>Распределение студентов по отраслям наук</h3>
+    <div id="piechart" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
     <h3>Отчеты субъектов Российской Федерации</h3>
     <table id="listRegions" class="table table-sm">
         <tbody>
@@ -104,42 +134,42 @@
                         @for (int i = 0; i < 29; i++)
                         {
                             <a style="padding-bottom: 5px; padding-top: 5px; margin-bottom: 2px;"
-                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" 
+                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year"
                                class="list-group-item list-group-item-action">@Model.RegionReports[i].Region.Name</a>
                         }
                     </div>
                     @*@for (int i = 0; i < 29; i++)
-                    {
-                        <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
-                    }*@
+                        {
+                            <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
+                        }*@
                 </td>
                 <td>
                     <div class="list-group">
                         @for (int i = 29; i < 58; i++)
                         {
                             <a style="padding-bottom: 5px; padding-top: 5px; margin-bottom: 2px;"
-                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" 
+                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year"
                                class="list-group-item list-group-item-action ">@Model.RegionReports[i].Region.Name</a>
                         }
                     </div>
                     @*@for (int i = 29; i < 58; i++)
-                    {
-                        <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
-                    }*@
+                        {
+                            <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
+                        }*@
                 </td>
                 <td>
                     <div class="list-group">
                         @for (int i = 58; i < Model.RegionReports.Count; i++)
                         {
                             <a style="padding-bottom: 5px; padding-top: 5px; margin-bottom: 2px;"
-                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" 
+                               href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year"
                                class="list-group-item list-group-item-action">@Model.RegionReports[i].Region.Name</a>
                         }
                     </div>
                     @*@for (int i = 58; i < Model.RegionReports.Count; i++)
-                    {
-                        <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
-                    }*@
+                        {
+                            <p><a href="RegionReport?id=@Model.RegionReports[i].Region.Id&year=@Model.Year" class="link-dark">@Model.RegionReports[i].Region.Name</a></p>
+                        }*@
                 </td>
             </tr>
         </tbody>

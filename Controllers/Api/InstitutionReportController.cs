@@ -24,15 +24,12 @@ namespace HigherEducationApp.Controllers.Api
             _context = context;
         }
 
-        // GET: api/InstitutionReport
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<InstitutionReport>>> GetInstitutionReports()
-        {
-            return await _context.InstitutionReports.ToListAsync();
-        }
 
-        // GET: api/InstitutionReport/5/2022/1.1
-        [HttpGet("{id}, {year}, {number}")]
+        /// <summary>
+        /// Возвращает показатели отчета по названию
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("getIndicatorInstitution")]
         public async Task<ActionResult<List<Indicator>>> GetInstitutionReport(int id, int year, string number)
         {
             List<Indicator> indicators = new List<Indicator>();
@@ -70,7 +67,7 @@ namespace HigherEducationApp.Controllers.Api
         //}
 
         // GET: api/InstitutionReport/5
-        [HttpGet("{id}")]
+        [HttpGet("getInstitutionReport")]
         //[Route("api/InstitutionReport/{id}")]
         public async Task<ActionResult<InstitutionReport>> GetInstitutionReport(int id)
         {
@@ -84,9 +81,11 @@ namespace HigherEducationApp.Controllers.Api
             return institutionReport;
         }
 
-        // PUT: api/InstitutionReport/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        /// <summary>
+        /// Возвращает показатели отчета по названию
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("updateInstitutionReport")]
         public async Task<IActionResult> PutInstitutionReport(int id, InstitutionReport institutionReport)
         {
             if (id != institutionReport.Id)
@@ -117,7 +116,7 @@ namespace HigherEducationApp.Controllers.Api
 
         // POST: api/InstitutionReport
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("addInstitutionReport")]
         public async Task<ActionResult<InstitutionReport>> PostInstitutionReport(InstitutionReport institutionReport)
         {
             _context.InstitutionReports.Add(institutionReport);
@@ -127,7 +126,7 @@ namespace HigherEducationApp.Controllers.Api
         }
 
         // DELETE: api/InstitutionReport/5
-        [HttpDelete("{id}")]
+        [HttpDelete("deleteInstitutionReport")]
         public async Task<IActionResult> DeleteInstitutionReport(int id)
         {
             var institutionReport = await _context.InstitutionReports.FindAsync(id);
