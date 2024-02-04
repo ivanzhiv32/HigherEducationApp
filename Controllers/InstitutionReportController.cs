@@ -42,8 +42,17 @@ namespace HigherEducationApp.Controllers
             var minEGE = institutionReportService.GetMinScore(id);
 
             var institutionReport = institutionReportService.GetInstitutionReport(id, year);
-            
+
             //var institutionReports = institutionReportService.GetInstitutionReports(id, year);
+            //var countAverageCountForeignersRus = institutionReportService.GetAverageCountForeignersRus(id);
+            //var countArticlesForeigners = institutionReportService.GetСountArticlesForeignersRus(id);
+            //var volumeNIOKRRus = institutionReportService.GetVolumeNIOKRRus(id);
+            //var countArticles = institutionReportService.GetAverageIndicatorRus(id, 99);
+            //var countArticlesRegion = institutionReportService.GetAverageIndicatorRegion(id, 99, 4);
+
+            //var rus = institutionReportService.GetAverageIndicatorRus(id, 62);
+            //var region = institutionReportService.GetAverageIndicatorRegion(id, 62, 4);
+
             ViewBag.AverageEGERus = averageEGERus;
             ViewBag.AverageEGE = averageEGE;
             ViewBag.MinEGE = minEGE;
@@ -51,6 +60,7 @@ namespace HigherEducationApp.Controllers
             ViewBag.Institution = institutionReportService.GetInstitution(id);
             ViewBag.Branches = institutionReportService.GetBranchesScience(institutionReport.Id);
             ViewBag.Ugns = institutionReportService.GetUgns(id);
+            ViewBag.FinanceIncome = institutionReportService.GetDistributionFinanceIncome(institutionReport.Id);
 
             List<InstitutionReport> institutionReports = new List<InstitutionReport>();
             for (int i = year; i > 2015; i--)

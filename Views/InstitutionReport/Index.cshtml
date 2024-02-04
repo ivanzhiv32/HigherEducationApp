@@ -8,7 +8,14 @@
 }
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="~/js/VolumeNIOKR.js" asp-append-version="true"></script>
+<script src="~/js/Articles.js" asp-append-version="true"></script>
 <script src="~/js/StudentsWithoutDormitory.js" asp-append-version="true"></script>
+<script src="~/js/CountForeigners.js" asp-append-version="true"></script>
+<script src="~/js/ArticlesForeigners.js" asp-append-version="true"></script>
+<script src="~/js/FinanceIncome.js" asp-append-version="true"></script>
+<script src="~/js/DoctorsOfSciences.js" asp-append-version="true"></script>
+
 @*<script src="~/js/ScoresEGE.js" asp-append-version="true"></script>*@
 <script>
     google.charts.load('current', { 'packages': ['line'] });
@@ -17,21 +24,23 @@
     function drawChart() {
 
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Год');
-        data.addColumn('number', 'Средний балл ЕГЭ');
-        data.addColumn('number', 'Средний балл в РФ');
+        data.addColumn('string', 'Год');
+        data.addColumn('number', 'Средний балл ЕГЭ в вузе');
+        data.addColumn('number', 'Средний балл ЕГЭ в РФ');
 
         data.addRows([
-            [2019, @ViewBag.AverageEGE[2019],  59.85],
-            [2020, @ViewBag.AverageEGE[2020],  62.3],
-            [2021, @ViewBag.AverageEGE[2021],  63.31],
-            [2022, @ViewBag.AverageEGE[2022],  63.62],
-            [2023, @ViewBag.AverageEGE[2023],  63.87]
+            ['2019', @ViewBag.AverageEGE[2019],  59.85],
+            ['2020', @ViewBag.AverageEGE[2020],  62.3],
+            ['2021', @ViewBag.AverageEGE[2021],  63.31],
+            ['2022', @ViewBag.AverageEGE[2022],  63.62],
+            ['2023', @ViewBag.AverageEGE[2023],  63.87]
         ]);
 
         var options = {
+            vAxis: { title: 'Балл ЕГЭ' },
+            hAxis: { title: 'Год' },
             displayAnnotations: true,
-            width: 850,
+            width: 1100,
             height: 500
         };
 
@@ -47,21 +56,23 @@
     function drawChart() {
 
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Год');
-        data.addColumn('number', 'Минимальный балл ЕГЭ');
-        data.addColumn('number', 'Минимальный балл в РФ');
+        data.addColumn('string', 'Год');
+        data.addColumn('number', 'Мин. балл ЕГЭ в вузе');
+        data.addColumn('number', 'Мин. балл ЕГЭ в РФ');
 
         data.addRows([
-            [2019, @ViewBag.MinEGE[2019], 42.13],
-            [2020, @ViewBag.MinEGE[2020], 42.86],
-            [2021, @ViewBag.MinEGE[2020], 49.36],
-            [2022, @ViewBag.MinEGE[2022], 43.84],
-            [2023, @ViewBag.MinEGE[2023], 43.86]
+            ['2019', @ViewBag.MinEGE[2019], 42.13],
+            ['2020', @ViewBag.MinEGE[2020], 42.86],
+            ['2021', @ViewBag.MinEGE[2020], 49.36],
+            ['2022', @ViewBag.MinEGE[2022], 43.84],
+            ['2023', @ViewBag.MinEGE[2023], 43.86]
         ]);
 
         var options = {
+            vAxis: { title: 'Балл ЕГЭ' },
+            hAxis: { title: 'Год' },
             displayAnnotations: true,
-            width: 850,
+            width: 1100,
             height: 500
         };
 
@@ -70,7 +81,6 @@
         chart.draw(data, google.charts.Line.convertOptions(options));
     }
 </script>
-<script src="~/js/VolumeNIOKR.js" asp-append-version="true"></script>
 @*<script src="~/js/DistributionOfStudents.js" asp-append-version="true"></script>*@
 <script>
 google.charts.load('current', { 'packages': ['bar'] });
@@ -115,21 +125,36 @@ function drawStuff() {
     google.charts.setOnLoadCallback(drawStuff);
 
     function drawStuff() {
-        var data = new google.visualization.arrayToDataTable([
-            ['Реализуемые УГН(С)', 'Количество студентов'],
-            ["02.00.00 - Компьютерные и информационные науки", 72],
-            ["09.00.00 - Информатика и вычислительная техника", 817],
-            ["10.00.00 - Информационная безопасность", 435],
-            ["11.00.00 - Электроника, радиотехника и системы связи", 177],
-            ['13.00.00 - Электро- и теплоэнергетика', 473],
-            ["15.00.00 - Машиностроение", 729],
-            ["20.00.00 - Техносферная безопасность и природообустройство", 84],
-            ["22.00.00 - Технологии материаловИскусство и культура", 54],
-            ["23.00.00 - Техника и технологии наземного транспорта", 305],
-            ["27.00.00 - Управление в технических системах", 205],
-            ["38.00.00 - Экономика и управление", 208],
-            ["44.00.00 - Образование и педагогические науки", 38]
-        ]);
+        var dt = [];
+        dt.push(['Реализуемые УГН(С)', 'Количество студентов']);
+
+        dt.push(["@Html.Raw(ViewBag.Ugns[0].Ugn.Name)", parseInt(@ViewBag.Ugns[0].CountStudents)]);
+        dt.push(["@Html.Raw(ViewBag.Ugns[1].Ugn.Name)", parseInt(@ViewBag.Ugns[1].CountStudents)]);
+        dt.push(["@Html.Raw(ViewBag.Ugns[2].Ugn.Name)", parseInt(@ViewBag.Ugns[2].CountStudents)]);
+        dt.push(["@Html.Raw(ViewBag.Ugns[3].Ugn.Name)", parseInt(@ViewBag.Ugns[3].CountStudents)]);
+        dt.push(["@Html.Raw(ViewBag.Ugns[4].Ugn.Name)", parseInt(@ViewBag.Ugns[4].CountStudents)]);
+        dt.push(["@Html.Raw(ViewBag.Ugns[5].Ugn.Name)", parseInt(@ViewBag.Ugns[5].CountStudents)]);
+        dt.push(["@Html.Raw(ViewBag.Ugns[6].Ugn.Name)", parseInt(@ViewBag.Ugns[6].CountStudents)]);
+        dt.push(["@Html.Raw(ViewBag.Ugns[7].Ugn.Name)", parseInt(@ViewBag.Ugns[7].CountStudents)]);
+        
+
+        @*for (let i = 0; i < @ViewBag.Ugns.Count; i++) {
+
+            dt.push(["@Html.Raw(ViewBag.Ugns[0].Ugn.Name)", parseInt(@ViewBag.Ugns[i].CountStudents)]);
+        }*@
+        @foreach(var ugn in ViewBag.Ugns)
+        {
+            @*<text> dt.push(["@Html.Raw(ugn.Ugn.Name)", parseInt(@ugn.CountStudents)])</text>*@
+            @*<text>dt.push(["09.00.00 - Информатика и вычислительная техника", 817])</text>*@
+        };
+        //var data = new google.visualization.arrayToDataTable([
+        //    ['Реализуемые УГН(С)', 'Количество студентов']
+        //]);
+
+        //dt.push(['Реализуемые УГН(С)', 'Количество студентов']);
+        //dt.push(["09.00.00 - Информатика и вычислительная техника", 817]);
+        //dt.push(["09.00.00 - Информатика и вычислительная техника", 817]);
+        var data = new google.visualization.arrayToDataTable(dt);
         var options = {
             width: 900,
             legend: { position: 'none' },
@@ -149,6 +174,25 @@ function drawStuff() {
         chart.draw(data, options);
     };
 </script>
+@*<script src="~/js/DistributionFinanceIncome.js" asp-append-version="true"></script>*@
+<script>
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Источник дохода', 'Доход'],
+            ['Внебюджетные источники', parseFloat(@ViewBag.FinanceIncome[0])],
+            ['Федеральный бюджет', parseFloat(@ViewBag.FinanceIncome[1])]
+        ]);
+
+        var options = {
+            pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('financeIncomeDonut'));
+        chart.draw(data, options);
+    }
+</script> 
 
 <div>
     <div class="list-group list-group-horizontal">
@@ -187,6 +231,7 @@ function drawStuff() {
     </table>
 </div>
 <div>
+    <hr>
     <h3>II. Образовательная деятельность</h3>
     <hr>
     <div class="mb-5" style="height: 500px">
@@ -201,13 +246,65 @@ function drawStuff() {
     <hr>
     <h3>III. Научно-исследовательская деятельность</h3>
     <hr>
-    <div class="mb-5" style="height: 500px">
-        <h4>Объем НИОКР, тыс.руб.</h4>
-        <div id="volumeNIOKR" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
-    </div> 
-    
+    <div>
+        <div class="mb-1">
+            <h4>Объем средств, поступивших от выполнения НИОКР, выполненных собственными силами</h4>
+            <div id="volumeNIOKR" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+        <hr>
+        <div class="mb-1">
+            <h4>Общее количество публикаций организации в расчете на 100 НПР</h4>
+            <div id="articles" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+    </div>
     <hr>
-    <div id="dormitory" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+    <h3>IV. Международная деятельность</h3>
+    <hr>
+    <div>
+        <div class="mb-1">
+            <h5>Численность иностранных студентов</h5>
+            <div id="countForeigners" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+        <hr>
+        <div class="mb-1">
+            <h5>Количество статей, подготовленных совместно с зарубежными организациями</h5>
+            <div id="countArticlesForeigners" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+    </div>
+    <hr>
+    <h3>V. Финансово-экономическая деятельность</h3>
+    <hr>
+    <div>
+        <div class="mb-1">
+            <h5>Доходы образовательной организации из всех источников в расчете на численность студентов</h5>
+            <div id="financeIncome" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+        <hr>
+        <div class="mb-1">
+            <h5>Распределение доходов организации</h5>
+            <div id="financeIncomeDonut" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+    </div>
+    <hr>
+    <h3>VI. Инфраструктура</h3>
+    <hr>
+    <div>
+        <div class="mb-1">
+            <h5>Доля студентов, не обеспеченных общежитием, в числе студентов, нуждающихся в общежитии</h5>
+            <div id="dormitory" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+    </div>
+    <hr>
+    <h3>VII. Кадровый состав</h3>
+    <hr>
+    <div>
+        <div class="mb-1">
+            <h5>Число НПР, имеющих ученую степень кандидата и доктора наук, в расчете на 100 студентов</h5>
+            <div id="doctorsOfSciences" style="width: 100%;height: 400px;padding-top: 15px;position: relative;" data-role="chart"></div>
+        </div>
+        <hr>
+    </div>
+
 </div>
 <div @*id="branchesScience"*@>
     <h3 @*class="text-center"*@>II. Распределение контингента студентов образовательной организации</h3>
@@ -260,19 +357,68 @@ function drawStuff() {
         <hr>*@
 </div>
 
-
+<h3>Показатели мониторинга эффективности деятельности организации</h3>
 <table class="table">
     <thead>
-        <tr>
-            <th scope="col">№</th>
-            <th scope="col">Наименование показателя</th>
-            <th scope="col">Значение</th>
-            <th scope="col">Единица измерения</th>
+        <tr class="table-secondary">
+            <th class="align-middle" scope="col"><h5>№</h5></th>
+            <th class="align-middle" scope="col"><h5>Наименование показателя</h5></th>
+            <th class="align-middle" scope="col"><h5>Значение</h5></th>
+            <th class="align-middle" scope="col"><h5>Единица измерения</h5></th>
         </tr>
     </thead>
     <tbody>
         @foreach (Indicator indicator in @ViewBag.Indicators[0].Indicators)
         {
+            if (indicator.TypeIndicator.Number == "1.1")
+            {
+                <tr class="table-secondary">
+                    <td scope="col"><h6>1</h6></td>
+                    <td colspan="3"><h6>Образовательная деятельность</h6></td>
+                </tr>
+            }
+            if (indicator.TypeIndicator.Number == "2.1")
+            {
+                <tr class="table-secondary">
+                    <td scope="col"><h6>2</h6></td>
+                    <td colspan="3"><h6>Научно-исследовательская деятельность</h6></td>
+                </tr>
+            }
+            if (indicator.TypeIndicator.Number == "3.1")
+            {
+                <tr class="table-secondary">
+                    <td scope="col"><h6>3</h6></td>
+                    <td colspan="3"><h6>Международная  деятельность</h6></td>
+                </tr>
+            }
+            if (indicator.TypeIndicator.Number == "4.1")
+            {
+                <tr class="table-secondary">
+                    <td scope="col"><h6>4</h6></td>
+                    <td colspan="3"><h6>Финансово-экономическая деятельность</h6></td>
+                </tr>
+            }
+            if (indicator.TypeIndicator.Number == "5.1")
+            {
+                <tr class="table-secondary">
+                    <td scope="col"><h6>5</h6></td>
+                    <td colspan="3"><h6>Инфраструктура</h6></td>
+                </tr>
+            }
+            if (indicator.TypeIndicator.Number == "6.1")
+            {
+                <tr class="table-secondary">
+                    <td scope="col"><h6>6</h6></td>
+                    <td colspan="3"><h6>Кадровый состав</h6></td>
+                </tr>
+            }
+            if (indicator.TypeIndicator.Number == "1")
+            {
+                <tr class="table-secondary">
+                    <td scope="col"><h6></h6></td>
+                    <td colspan="3"><h6>Дополнительные характеристики образовательной организации</h6></td>
+                </tr>
+            }
             <tr>
                 <td scope="col">@indicator.TypeIndicator.Number</td>
                 <td>@indicator.TypeIndicator.Name</td>

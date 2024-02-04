@@ -25,6 +25,17 @@ namespace HigherEducationApp.Services
                 return reviews;
             }
         }
+        public ReviewOfInstitution GetReviewsById(int id)
+        {
+            using (HigherEducationSystemDbContext educationSystemDbContext = new HigherEducationSystemDbContext())
+            {
+                var review = educationSystemDbContext.ReviewsOfInstitution
+                    .Include(c => c.Institution)
+                    .FirstOrDefault(c => c.Id == id);
+
+                return review;
+            }
+        }
 
         public List<ReviewOfInstitution> GetReviewsByInstitution(int idInstitution)
         {

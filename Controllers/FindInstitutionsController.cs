@@ -26,8 +26,11 @@ namespace HigherEducationApp.Controllers
                 .Include(c => c.Region)
                 .Include(c => c.Ugns)
                 .ToListAsync();
+            var regions = _context.Regions.ToList();
+            var ugns = _context.Ugns.ToList();
 
-
+            ViewBag.Regions = regions;
+            ViewBag.Ugns = ugns;
             return View(institutions);
         }
 

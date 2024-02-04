@@ -183,5 +183,112 @@ namespace HigherEducationApp.Services
                 return minScoreRus;
             }
         }
+        public Dictionary<int, double> GetAverageCountForeignersRus(int idInstitution)
+        {
+            using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
+            {
+                Dictionary<int, double> minScoreRus = new Dictionary<int, double>();
+
+                var indicators = educationSystemContext.Indicators
+                    .Include(c => c.TypeIndicator)
+                    .Where(c => c.TypeIndicator.Id == 118);
+
+                for (int i = 2017; i < 2024; i++)
+                {
+                    minScoreRus.Add(i, indicators.Where(c => c.InstitutionReport.Year.Year == i).Sum(c => c.Value) / 
+                        indicators.Where(c => c.InstitutionReport.Year.Year == i).Count());
+                }
+                return minScoreRus;
+            }
+        }
+        public Dictionary<int, double> GetСountArticlesForeignersRus(int idInstitution)
+        {
+            using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
+            {
+                Dictionary<int, double> minScoreRus = new Dictionary<int, double>();
+
+                var indicators = educationSystemContext.Indicators
+                    .Include(c => c.TypeIndicator)
+                    .Where(c => c.TypeIndicator.Id == 123);
+
+                for (int i = 2017; i < 2024; i++)
+                {
+                    minScoreRus.Add(i, indicators.Where(c => c.InstitutionReport.Year.Year == i).Sum(c => c.Value) /
+                        indicators.Where(c => c.InstitutionReport.Year.Year == i).Count());
+                }
+                return minScoreRus;
+            }
+        }
+        public Dictionary<int, double> GetVolumeNIOKRRus(int idInstitution)
+        {
+            using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
+            {
+                Dictionary<int, double> minScoreRus = new Dictionary<int, double>();
+
+                var indicators = educationSystemContext.Indicators
+                    .Include(c => c.TypeIndicator)
+                    .Where(c => c.TypeIndicator.Id == 97);
+
+                for (int i = 2017; i < 2024; i++)
+                {
+                    minScoreRus.Add(i, indicators.Where(c => c.InstitutionReport.Year.Year == i).Sum(c => c.Value) /
+                        indicators.Where(c => c.InstitutionReport.Year.Year == i).Count());
+                }
+                return minScoreRus;
+            }
+        }
+        public Dictionary<int, double> GetAverageIndicatorRus(int idInstitution, int idIndicator)
+        {
+            using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
+            {
+                Dictionary<int, double> minScoreRus = new Dictionary<int, double>();
+
+                var indicators = educationSystemContext.Indicators
+                    .Include(c => c.TypeIndicator)
+                    .Where(c => c.TypeIndicator.Id == idIndicator);
+
+                for (int i = 2017; i < 2024; i++)
+                {
+                    minScoreRus.Add(i, indicators.Where(c => c.InstitutionReport.Year.Year == i).Sum(c => c.Value) /
+                        indicators.Where(c => c.InstitutionReport.Year.Year == i).Count());
+                }
+                return minScoreRus;
+            }
+        }
+        public Dictionary<int, double> GetAverageIndicatorRegion(int idInstitution, int idIndicator, int idRegion)
+        {
+            using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
+            {
+                Dictionary<int, double> minScoreRus = new Dictionary<int, double>();
+
+                var indicators = educationSystemContext.Indicators
+                    .Include(c => c.TypeIndicator)
+                    .Where(c => c.TypeIndicator.Id == idIndicator)
+                    .Where(c => c.InstitutionReport.Institution.Region.Id == 4);
+
+                for (int i = 2017; i < 2024; i++)
+                {
+                    minScoreRus.Add(i, indicators.Where(c => c.InstitutionReport.Year.Year == i).Sum(c => c.Value) /
+                        indicators.Where(c => c.InstitutionReport.Year.Year == i).Count());
+                }
+                return minScoreRus;
+            }
+        }
+        public double[] GetDistributionFinanceIncome(int idInstitutionReport)
+        {
+            using (HigherEducationSystemDbContext educationSystemContext = new HigherEducationSystemDbContext())
+            {
+                double[] result = new double[2] { 0, 0};
+
+                result[0] = educationSystemContext.Indicators
+                    .Where(c => c.TypeIndicator.Id == 142)
+                    .FirstOrDefault(c => c.InstitutionReport.Id == idInstitutionReport).Value;
+                result[1] = educationSystemContext.Indicators
+                    .Where(c => c.TypeIndicator.Id == 140)
+                    .FirstOrDefault(c => c.InstitutionReport.Id == idInstitutionReport).Value;
+                result[1] -= result[0];
+                return result;
+            }
+        }
     }
 }

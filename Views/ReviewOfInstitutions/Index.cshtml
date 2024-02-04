@@ -14,7 +14,7 @@
         }
     </select>
     <div>
-        @for (int i = 0; i < 20; i++)
+        @for (int i = 0; i < Model.Count; i++)
         {
             <div class="card w-90 mx-5 mb-3" style="background-color: @ViewBag.TonalityColor[Model[i].Tonality]">
                 <h4 class="card-header">@Model[i].Institution.Name</h4>

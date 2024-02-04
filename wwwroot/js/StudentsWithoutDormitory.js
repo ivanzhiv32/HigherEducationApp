@@ -3,7 +3,7 @@ google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
-        ['Год', '%'],
+        ['Год', 'Доля студентов'],
         ['2019', 23.18],
         ['2020', 6.09],
         ['2021', 10],
@@ -12,7 +12,7 @@ function drawChart() {
     ]);
 
     var options = {
-        title: 'Доля студентов, необеспеченных общежитием, %',
+        vAxis: { title: '%' },
         hAxis: { title: 'Год', titleTextStyle: { color: '#333' } },
         vAxis: { minValue: 0 }
     };

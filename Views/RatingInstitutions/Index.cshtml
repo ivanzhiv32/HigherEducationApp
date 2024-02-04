@@ -28,7 +28,18 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (RatingInstitution rating in Model)
+            @for (int i = 1; i < Model.Count; i++)
+            {
+            <tr>
+                <td>@i</td>
+                <td><a href="InstitutionReport?id=@Model[i-1].Institution.Id&year=@Model[i-1].YearReport.Year">@Model[i-1].Institution.Name</a></td>
+                <td>@Math.Round(Model[i-1].Rating, 2)</td>
+                <td>@Model[i-1].RatingEducation</td>
+                <td>@Model[i-1].RatingScience</td>
+                <td>@Model[i-1].RatingFinance</td>
+            </tr>
+            }
+            @*@foreach (RatingInstitution rating in Model)
             {
             <tr>
                 <td>@Model.IndexOf(rating)</td>
@@ -38,7 +49,7 @@
                 <td>@rating.RatingScience</td>
                 <td>@rating.RatingFinance</td>
             </tr>
-            }
+            }*@
         </tbody>
     </table>
 </div>

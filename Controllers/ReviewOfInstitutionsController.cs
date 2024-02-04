@@ -30,7 +30,21 @@ namespace HigherEducationApp.Controllers
         // GET: ReviewOfInstitutions
         public async Task<IActionResult> Index(int count)
         {
-            List<ReviewOfInstitution> reviews = reviewService.GetReviews(count);
+            //List<ReviewOfInstitution> reviews = reviewService.GetReviews(count);
+            //for (int i = 1; i < reviews.Count; i++)
+            //{
+            //    if(reviews[i].Text == reviews[i-1].Text)
+            //    {
+            //        reviews.RemoveAt(i);
+            //    }
+            //}
+            Random rnd = new Random();
+            List<ReviewOfInstitution> reviews = new List<ReviewOfInstitution>();
+            for (int i = 0; i < count; i++)
+            {
+                reviews.Add(reviewService.GetReviewsById(rnd.Next(7437, 34306)));
+            }
+
             ViewBag.Institutions = _context.Institutions.ToList();
             ViewBag.TonalityColor = tonalityColor;
 

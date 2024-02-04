@@ -4,24 +4,72 @@
     ViewData["Title"] = "Поиск вуза";
 }
 
-<div>
-    <form action="/FindInstitutions/FindInstitution" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="form0" method="post">
-        <input type="text" name="name" />
-        <input type="submit" value="Поиск" />
-    </form>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">Название вуза</span>
-        <input type="text" class="form-control" aria-label="Пример размера поля ввода" aria-describedby="inputGroup-sizing-default">
-    </div>
-    <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01">Направление</label>
-        <select class="form-select" id="inputGroupSelect01">
-            <option selected>Выберите...</option>
-            <option value="1">Математика</option>
-            <option value="2">Биология</option>
-            <option value="3">Физика</option>
+<div class="align-content-center">
+    <h2>Поиск образовательной организации</h2>
+
+    <div class="row g-3 align-items-center my-3">
+        <div class="col-auto w-25">
+            <label for="inputPassword6" class="col-form-label">Направление науки</label>
+        </div>
+        <select class="form-select form-select-lg col-auto py-2 h-100 w-50" id="inputGroupSelect01">
+            <option selected>Выберите направление науки</option>
+            <option value="1">Науки об обществе</option>
+            <option value="2">Образование и педагогические науки</option>
+            <option value="3">Гуманитарные науки</option>
+            <option value="3">Искусство и культура</option>
+            <option value="3">Математические и естественные науки</option>
+            <option value="3">Инженерное дело, технологии и технические науки</option>
+            <option value="3">Здравоохранение и медицинские науки</option>
+            <option value="3">Сельское хозяйство и сельскохозяйственные науки</option>
         </select>
     </div>
+
+    <div class="row g-3 align-items-center my-3">
+        <div class="col-auto w-25">
+            <label for="inputPassword6" class="col-form-label">Регион РФ</label>
+        </div>
+        <select class="form-select form-select-lg col-auto py-2 h-100 w-50" id="inputGroupSelect01">
+            <option selected>Выберите регион РФ</option>
+            @for (int i = 1; i < ViewBag.Regions.Count + 1; i++)
+            {
+                <option value="@ViewBag.Regions[i - 1].Id">@ViewBag.Regions[i - 1].Name</option>
+            }
+
+        </select>
+    </div>
+
+    <div class="row g-3 align-items-center my-3">
+        <div class="col-auto w-25">
+            <label for="inputPassword6" class="col-form-label">Специальность УГН(С)</label>
+        </div>
+        <select class="form-select form-select-lg col-auto py-2 h-100 w-50" id="inputGroupSelect01">
+            <option selected>Выберите специальность</option>
+            @for (int i = 1; i < ViewBag.Ugns.Count + 1; i++)
+            {
+                <option value="@ViewBag.Ugns[i - 1].Id">@ViewBag.Ugns[i - 1].Name</option>
+            }
+
+        </select>
+    </div>
+    <div class="row g-2 my-3">
+        <div class="col-auto w-25">
+            <label for="inputPassword6" class="col-form-label">Ваш средний балл ЕГЭ</label>
+        </div>
+        <div class="col-auto w-50 px-0">
+            <input type="text" id="ege" class="form-control">
+        </div>
+    </div>
+
+    <form class="input-group row g-2 my-3" action="/FindInstitutions/FindInstitution" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="form0" method="post">
+        <div class="col-auto w-25">
+            <label for="inputPassword6" class="col-form-label">Название организации</label>
+        </div>
+        <div class="col-auto w-50">
+            <input type="text" name="name" class="form-control">
+        </div>
+        <br />
+        <input type="submit" class="btn btn-secondary w-25" value="Поиск организации" />
+    </form>
 
     <div id="results"></div>
 </div>

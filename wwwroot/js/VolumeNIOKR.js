@@ -1,23 +1,25 @@
-﻿google.charts.load('current', { 'packages': ['bar'] });
-google.charts.setOnLoadCallback(drawChart);
+﻿google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawVisualization);
 
-function drawChart() {
+function drawVisualization() {
     var data = google.visualization.arrayToDataTable([
-        ['Год', 'Объем'],
-        ['2019', 92.986],
-        ['2020', 101.428],
-        ['2021', 99.751],
-        ['2022', 42.542],
-        ['2023', 48.741]
+        ['Год', 'В вузе', 'Средний объем в РФ'],
+        ['2017', 92986, 47732],
+        ['2018', 92986, 69105],
+        ['2019', 92986, 78398],
+        ['2020', 101428, 85618],
+        ['2021', 99751, 82810],
+        ['2022', 42542, 92908],
+        ['2023', 48741, 110865]
     ]);
 
     var options = {
-        chart: {
-            title: 'Объем НИОКР, тыс.руб.'
-        }
+        vAxis: { title: 'Объем НИКОР, тыс.руб.' },
+        hAxis: { title: 'Год' },
+        seriesType: 'bars',
+        series: { 1: { type: 'line' } }
     };
 
-    var chart = new google.charts.Bar(document.getElementById('volumeNIOKR'));
-
-    chart.draw(data, google.charts.Bar.convertOptions(options));
+    var chart = new google.visualization.ComboChart(document.getElementById('volumeNIOKR'));
+    chart.draw(data, options);
 }
